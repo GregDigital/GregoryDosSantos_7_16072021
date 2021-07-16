@@ -1,0 +1,162 @@
+/* Style the search field */
+nav {
+  display: flex;
+  justify-content: center;
+
+  form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  form.search-bar input[type="search"] {
+    padding: 25px;
+    font-size: 17px;
+    border: 1px solid grey;
+    width: 80%;
+    height: 69px;
+    background: #f1f1f1;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 3px 7px 11px -1px rgba(101, 101, 101, 0.98);
+    }
+  }
+
+  /* Style the submit button */
+  form.search-bar button {
+    width: 4%;
+    padding: 10px;
+    color: black;
+    font-size: 2em;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    position: relative;
+    right: 69px;
+  }
+}
+
+//=========== Button ingredient===============================
+
+.button-option {
+  display: flex;
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-top: 50px;
+
+  form.search-ingredient input[type="search"] {
+    padding: 25px;
+    font-size: 1em;
+    border: 1px solid grey;
+    width: 60%;
+    height: 69px;
+    background: #3282f7;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: none;
+    }
+    &::placeholder {
+      color: white;
+      font-size: 1em;
+    }
+  }
+
+  form.search-ingredient button {
+    width: 4%;
+    padding: 10px;
+    color: white;
+    font-size: 1.3em;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    position: relative;
+    right: 58px;
+    background: none;
+    bottom: -3px;
+  }
+
+  //=========== Button appareil===============================
+
+  form.search-appareil input[type="search"] {
+    padding: 25px;
+    font-size: 1em;
+    border: 1px solid grey;
+    width: 60%;
+    height: 69px;
+    background: #68d9a4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: none;
+    }
+    &::placeholder {
+      color: white;
+      font-size: 1em;
+    }
+  }
+
+  form.search-appareil button {
+    width: 4%;
+    padding: 10px;
+    color: white;
+    font-size: 1.3em;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    position: relative;
+    right: 58px;
+    background: none;
+    bottom: -3px;
+  }
+
+  //=========== Button ustensiles===============================
+
+  form.search-ustensiles input[type="search"] {
+    padding: 25px;
+    font-size: 1em;
+    border: 1px solid grey;
+    width: 60%;
+    height: 69px;
+    background: #ed6454;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: none;
+    }
+    &::placeholder {
+      color: white;
+      font-size: 1em;
+    }
+  }
+
+  form.search-ustensiles button {
+    width: 4%;
+    padding: 10px;
+    color: white;
+    font-size: 1.3em;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    position: relative;
+    right: 58px;
+    background: none;
+    bottom: -3px;
+  }
+}

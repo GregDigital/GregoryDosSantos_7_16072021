@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./sass/style.css" />
+    <script
+      src="https://kit.fontawesome.com/a650986bb4.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <title>Les petits plats</title>
+  </head>
+
+  <body>
+    <header>
+      <a href="index.html" title="Page d'accueil"
+        ><img src="./media/logo.svg" alt="logo du site les petits plats"
+      /></a>
+    </header>
+
+    <nav>
+      <form class="search-bar" action="">
+        <input
+          type="search"
+          id="search"
+          placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+          name="search"
+        />
+        <button id="search" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </nav>
+
+    <div class="button-option">
+      <!--Button ingredient-->
+      <form class="search-ingredient" action="">
+        <input
+          type="search"
+          id="search-ingredient"
+          placeholder="Ingrédient"
+          name="search-ingredient"
+        />
+        <button id="search-ingredient" type="submit">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+      </form>
+
+      <!--Button appareil-->
+      <form class="search-appareil" action="">
+        <input
+          type="search"
+          id="search-appareil"
+          placeholder="Appareil"
+          name="search-appareil"
+        />
+        <button id="search-appareil" type="submit">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+      </form>
+
+      <!--Button ustensiles-->
+
+      <form class="search-ustensiles" action="">
+        <input
+          type="search"
+          id="search-ustensiles"
+          placeholder="Ustensiles"
+          name="search-ustensiles"
+        />
+        <button id="search-ustensiles" type="submit">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+      </form>
+    </div>
+    <main>
+      <section>
+        <article class="recipes-container">
+          <div class="img"></div>
+          <div class="recipes-container-infos">
+            <div class="recipes-infos">
+              <h3 class="name">Limonade de coco</h3>
+              <div class="time">
+                <i class="far fa-clock"></i><span> 10 min</span>
+              </div>
+            </div>
+            <div class="recipes">
+              <div class="recipes-composition">
+                <ul class="recipes-ingredient">
+                  <li>Lait de coco : <span>80 g</span></li>
+                  <li>Jus de citron : <span>80</span></li>
+                </ul>
+              </div>
+              <div class="recipes-description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptas vero, illo tenetur ea, deleniti ratione natus saepe
+                minus neque dolor veritatis maiores totam cumque quidem unde
+                veniam voluptates! Sit, explicabo? Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Voluptas vero, illo tenetur ea,
+                deleniti ratione natus saepe minus neque dolor veritatis maiores
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,455 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: normal;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+header img {
+  margin-top: 42px;
+  margin-bottom: 50px;
+}
+
+/* Style the search field */
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  /* Style the submit button */
+}
+
+nav form {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+nav form.search-bar input[type="search"] {
+  padding: 25px;
+  font-size: 17px;
+  border: 1px solid grey;
+  width: 80%;
+  height: 69px;
+  background: #f1f1f1;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+}
+
+nav form.search-bar input[type="search"]:focus-visible {
+  outline: none;
+  -webkit-box-shadow: 3px 7px 11px -1px rgba(101, 101, 101, 0.98);
+          box-shadow: 3px 7px 11px -1px rgba(101, 101, 101, 0.98);
+}
+
+nav form.search-bar button {
+  width: 4%;
+  padding: 10px;
+  color: black;
+  font-size: 2em;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  position: relative;
+  right: 69px;
+}
+
+.button-option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-top: 50px;
+}
+
+.button-option form.search-ingredient input[type="search"] {
+  padding: 25px;
+  font-size: 1em;
+  border: 1px solid grey;
+  width: 60%;
+  height: 69px;
+  background: #3282f7;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+}
+
+.button-option form.search-ingredient input[type="search"]:focus-visible {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.button-option form.search-ingredient input[type="search"]::-webkit-input-placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-ingredient input[type="search"]:-ms-input-placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-ingredient input[type="search"]::-ms-input-placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-ingredient input[type="search"]::placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-ingredient button {
+  width: 4%;
+  padding: 10px;
+  color: white;
+  font-size: 1.3em;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  position: relative;
+  right: 58px;
+  background: none;
+  bottom: -3px;
+}
+
+.button-option form.search-appareil input[type="search"] {
+  padding: 25px;
+  font-size: 1em;
+  border: 1px solid grey;
+  width: 60%;
+  height: 69px;
+  background: #68d9a4;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+}
+
+.button-option form.search-appareil input[type="search"]:focus-visible {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.button-option form.search-appareil input[type="search"]::-webkit-input-placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-appareil input[type="search"]:-ms-input-placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-appareil input[type="search"]::-ms-input-placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-appareil input[type="search"]::placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-appareil button {
+  width: 4%;
+  padding: 10px;
+  color: white;
+  font-size: 1.3em;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  position: relative;
+  right: 58px;
+  background: none;
+  bottom: -3px;
+}
+
+.button-option form.search-ustensiles input[type="search"] {
+  padding: 25px;
+  font-size: 1em;
+  border: 1px solid grey;
+  width: 60%;
+  height: 69px;
+  background: #ed6454;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+}
+
+.button-option form.search-ustensiles input[type="search"]:focus-visible {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.button-option form.search-ustensiles input[type="search"]::-webkit-input-placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-ustensiles input[type="search"]:-ms-input-placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-ustensiles input[type="search"]::-ms-input-placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-ustensiles input[type="search"]::placeholder {
+  color: white;
+  font-size: 1em;
+}
+
+.button-option form.search-ustensiles button {
+  width: 4%;
+  padding: 10px;
+  color: white;
+  font-size: 1.3em;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  position: relative;
+  right: 58px;
+  background: none;
+  bottom: -3px;
+}
+
+section {
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-top: 50px;
+}
+
+.recipes-container {
+  width: 380px;
+  height: 364px;
+  background: #e7e7e7;
+  border-radius: 10px;
+}
+
+.recipes-container .img {
+  width: 380px;
+  height: 178px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #c7bebe;
+}
+
+.recipes-container-infos {
+  margin: 5%;
+}
+
+.recipes-container-infos .recipes-infos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  margin-bottom: 5%;
+}
+
+.recipes-container-infos .recipes-infos h3 {
+  font-size: 18px;
+  line-height: 22px;
+  color: #000;
+}
+
+.recipes-container-infos .recipes-infos .time {
+  font-weight: bold;
+}
+
+.recipes-container-infos .recipes-infos .time i {
+  font-size: 1.2em;
+}
+
+.recipes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 12px;
+}
+
+.recipes .recipes-composition {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.recipes .recipes-composition li {
+  font-weight: bold;
+  margin-bottom: 5%;
+}
+
+.recipes .recipes-composition span {
+  font-weight: normal;
+}
+
+.recipes .recipes-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+/*# sourceMappingURL=style.css.map */
