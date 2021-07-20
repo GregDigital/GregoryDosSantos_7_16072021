@@ -79,21 +79,25 @@ nav form.search-bar button {
 
 .button-option form.search-ingredient input[type="search"]::-webkit-input-placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
 .button-option form.search-ingredient input[type="search"]:-ms-input-placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
 .button-option form.search-ingredient input[type="search"]::-ms-input-placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
 .button-option form.search-ingredient input[type="search"]::placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
@@ -132,21 +136,25 @@ nav form.search-bar button {
 
 .button-option form.search-appareil input[type="search"]::-webkit-input-placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
 .button-option form.search-appareil input[type="search"]:-ms-input-placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
 .button-option form.search-appareil input[type="search"]::-ms-input-placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
 .button-option form.search-appareil input[type="search"]::placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
@@ -185,21 +193,25 @@ nav form.search-bar button {
 
 .button-option form.search-ustensiles input[type="search"]::-webkit-input-placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
 .button-option form.search-ustensiles input[type="search"]:-ms-input-placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
 .button-option form.search-ustensiles input[type="search"]::-ms-input-placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
 .button-option form.search-ustensiles input[type="search"]::placeholder {
   color: white;
+  opacity: 1;
   font-size: 1em;
 }
 
