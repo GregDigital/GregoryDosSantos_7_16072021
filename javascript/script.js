@@ -65,11 +65,15 @@ const btnIngredient = document.querySelector(".btn-ingredient");
 const inputIngredient = document.querySelector(".search-ingredient");
 const sousMenu = document.querySelector(".sous-menu");
 const body = document.querySelector("body");
-const up = document.querySelector;
+const up = document.querySelector("#i");
 
 btnIngredient.addEventListener("click", () => {
   inputIngredient.style.width = "39%";
   sousMenu.style.display = "block";
+  document.getElementById("i").classList.add("fa-chevron-up");
+  document.getElementById("i").classList.remove("fa-chevron-down");
+  document.querySelector(".search-ingredient").placeholder =
+    "Rechercher un ingrédient";
 });
 
 fetchRecipes();
