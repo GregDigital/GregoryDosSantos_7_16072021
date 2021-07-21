@@ -22,6 +22,7 @@ function recipes(res) {
 function generateIngredients(ingredients) {
   let acc = [];
   for (let ingredient of ingredients) {
+    console.log(ingredient.ingredient);
     acc.push(` <li>${ingredient} : <span>80 g</span></li>`);
   }
   let html = acc.reduce((a, l) => a + l);
