@@ -1,66 +1,70 @@
 section {
+  display: flex;
+  flex-wrap: wrap;
   margin-left: 8%;
   margin-right: 8%;
   margin-top: 50px;
-}
 
-.recipes-container {
-  width: 380px;
-  height: 364px;
-  background: #e7e7e7;
-  border-radius: 10px;
+  .recipes-container {
+    min-width: 380px;
+    min-height: 364px;
+    background: #e7e7e7;
+    border-radius: 10px;
+    flex: 1 0 30%;
+    margin: 10px;
 
-  .img {
-    width: 380px;
-    height: 178px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background-color: #c7bebe;
-  }
-}
-
-.recipes-container-infos {
-  margin: 5%;
-  .recipes-infos {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 5%;
-    h3 {
-      font-size: 18px;
-      line-height: 22px;
-      color: #000;
+    .img {
+      width: auto;
+      height: 178px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      background-color: #c7bebe;
     }
+  }
 
-    .time {
-      font-weight: bold;
-      i {
-        font-size: 1.2em;
+  .recipes-container-infos {
+    margin: 5%;
+    .recipes-infos {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 5%;
+      h3 {
+        font-size: 18px;
+        line-height: 22px;
+        color: #000;
+      }
+
+      .time {
+        font-weight: bold;
+        i {
+          font-size: 1.2em;
+        }
       }
     }
   }
-}
 
-.recipes {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
+  .recipes {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
 
-  .recipes-composition {
-    flex: 1;
-    li {
-      font-weight: bold;
-      margin-bottom: 5%;
+    .recipes-composition {
+      flex: 1;
+      li {
+        font-weight: bold;
+        margin-bottom: 5%;
+      }
+      span {
+        font-weight: normal;
+      }
     }
-    span {
-      font-weight: normal;
+
+    .recipes-description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      flex: 2;
     }
-  }
-
-  .recipes-description {
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    flex: 2;
   }
 }

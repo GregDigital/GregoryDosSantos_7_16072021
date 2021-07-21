@@ -1,14 +1,13 @@
 const container = document.querySelector("#container");
-console.log(container);
 
-let t = [];
-
+// ================= Fetch ==============================================
 async function fetchRecipes() {
   await fetch("json/recipes.json")
     .then((res) => res.json())
-    .then((data) => console.log(data)((t = recipes(data))));
+    .then((data) => recipes(data));
 }
 
+// ================= fonction qui permet de générer le contenu des des recettes=============
 function recipes(res) {
   let containerRecipes = [];
   for (let recipe of res.recipes) {
@@ -17,6 +16,19 @@ function recipes(res) {
   let html = containerRecipes.reduce((a, l) => a + l);
   container.innerHTML = html;
 }
+
+// ==================== fonction qui permet de générer les ingredients dans le li =======
+
+function generateIngredients(ingredients) {
+  let acc = [];
+  for (let ingredient of ingredients) {
+    acc.push(` <li>${ingredient} : <span>80 g</span></li>`);
+  }
+  let html = acc.reduce((a, l) => a + l);
+  return html;
+}
+
+// ========================= fonction qui permet de retourner le contenu des recettes =========
 
 function recipesDislay(recipe) {
   return `
@@ -33,9 +45,9 @@ function recipesDislay(recipe) {
         <div class="recipes">
           <div class="recipes-composition">
             <ul class="recipes-ingredient">
-           
-              <li>Lait de coco : <span>80 g</span></li>
-              <li>Jus de citron : <span>2</span></li>
+            ${generateIngredients(recipe.ingredients)}
+            
+              
             </ul>
           </div>
           <div class="recipes-description">
@@ -46,5 +58,18 @@ function recipesDislay(recipe) {
     </article>
       `;
 }
+
+// ===========================  Button Ingredients   ======================
+
+const btnIngredient = document.querySelector(".btn-ingredient");
+const inputIngredient = document.querySelector(".search-ingredient");
+const sousMenu = document.querySelector(".sous-menu");
+const body = document.querySelector("body");
+const up = document.querySelector;
+
+btnIngredient.addEventListener("click", () => {
+  inputIngredient.style.width = "39%";
+  sousMenu.style.display = "block";
+});
 
 fetchRecipes();

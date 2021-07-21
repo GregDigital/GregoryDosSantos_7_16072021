@@ -48,17 +48,18 @@ nav {
   margin-right: 8%;
   margin-top: 50px;
 
-  form.search-ingredient input[type="search"] {
+  .search-ingredient {
     padding: 25px;
     font-size: 1em;
     border: 1px solid grey;
-    width: 60%;
+    width: 16%;
     height: 69px;
     background: #3282f7;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     position: relative;
+    z-index: 3;
 
     &:focus-visible {
       outline: none;
@@ -70,8 +71,7 @@ nav {
       font-size: 1em;
     }
   }
-
-  form.search-ingredient button {
+  .btn-ingredient {
     width: 4%;
     padding: 10px;
     color: white;
@@ -83,21 +83,41 @@ nav {
     right: 58px;
     background: none;
     bottom: -3px;
+    z-index: 3;
+  }
+
+  .content-ingredient {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 10%;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    li {
+      width: 100px;
+      margin-bottom: 2%;
+    }
   }
 
   //=========== Button appareil===============================
 
-  form.search-appareil input[type="search"] {
+  .search-appareil {
     padding: 25px;
     font-size: 1em;
     border: 1px solid grey;
-    width: 60%;
+    width: 16%;
     height: 69px;
     background: #68d9a4;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     position: relative;
+    z-index: 3;
 
     &:focus-visible {
       outline: none;
@@ -110,7 +130,7 @@ nav {
     }
   }
 
-  form.search-appareil button {
+  .btn-appareil {
     width: 4%;
     padding: 10px;
     color: white;
@@ -122,21 +142,23 @@ nav {
     right: 58px;
     background: none;
     bottom: -3px;
+    z-index: 3;
   }
 
   //=========== Button ustensiles===============================
 
-  form.search-ustensiles input[type="search"] {
+  .search-ustensiles {
     padding: 25px;
     font-size: 1em;
     border: 1px solid grey;
-    width: 60%;
+    width: 16%;
     height: 69px;
     background: #ed6454;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     position: relative;
+    z-index: 3;
 
     &:focus-visible {
       outline: none;
@@ -149,7 +171,7 @@ nav {
     }
   }
 
-  form.search-ustensiles button {
+  .btn-ustensiles {
     width: 4%;
     padding: 10px;
     color: white;
@@ -161,5 +183,25 @@ nav {
     right: 58px;
     background: none;
     bottom: -3px;
+    z-index: 3;
+  }
+
+  .sous-menu {
+    padding: 25px;
+    font-size: 1em;
+    border: 1px solid grey;
+    width: 30%;
+    height: auto;
+    background: #3282f7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 2;
+    display: none;
+
+    .btn-ustensiles {
+      background: #68d9a4;
+    }
   }
 }

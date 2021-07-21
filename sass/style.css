@@ -209,50 +209,51 @@ nav form.search-bar button {
   margin-top: 50px;
 }
 
-.button-option form.search-ingredient input[type="search"] {
+.button-option .search-ingredient {
   padding: 25px;
   font-size: 1em;
   border: 1px solid grey;
-  width: 60%;
+  width: 16%;
   height: 69px;
   background: #3282f7;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   position: relative;
+  z-index: 3;
 }
 
-.button-option form.search-ingredient input[type="search"]:focus-visible {
+.button-option .search-ingredient:focus-visible {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.button-option form.search-ingredient input[type="search"]::-webkit-input-placeholder {
+.button-option .search-ingredient::-webkit-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-ingredient input[type="search"]:-ms-input-placeholder {
+.button-option .search-ingredient:-ms-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-ingredient input[type="search"]::-ms-input-placeholder {
+.button-option .search-ingredient::-ms-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-ingredient input[type="search"]::placeholder {
+.button-option .search-ingredient::placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-ingredient button {
+.button-option .btn-ingredient {
   width: 4%;
   padding: 10px;
   color: white;
@@ -264,52 +265,83 @@ nav form.search-bar button {
   right: 58px;
   background: none;
   bottom: -3px;
+  z-index: 3;
 }
 
-.button-option form.search-appareil input[type="search"] {
+.button-option .content-ingredient {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 10%;
+}
+
+.button-option .content-ingredient ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.button-option .content-ingredient li {
+  width: 100px;
+  margin-bottom: 2%;
+}
+
+.button-option .search-appareil {
   padding: 25px;
   font-size: 1em;
   border: 1px solid grey;
-  width: 60%;
+  width: 16%;
   height: 69px;
   background: #68d9a4;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   position: relative;
+  z-index: 3;
 }
 
-.button-option form.search-appareil input[type="search"]:focus-visible {
+.button-option .search-appareil:focus-visible {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.button-option form.search-appareil input[type="search"]::-webkit-input-placeholder {
+.button-option .search-appareil::-webkit-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-appareil input[type="search"]:-ms-input-placeholder {
+.button-option .search-appareil:-ms-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-appareil input[type="search"]::-ms-input-placeholder {
+.button-option .search-appareil::-ms-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-appareil input[type="search"]::placeholder {
+.button-option .search-appareil::placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-appareil button {
+.button-option .btn-appareil {
   width: 4%;
   padding: 10px;
   color: white;
@@ -321,52 +353,54 @@ nav form.search-bar button {
   right: 58px;
   background: none;
   bottom: -3px;
+  z-index: 3;
 }
 
-.button-option form.search-ustensiles input[type="search"] {
+.button-option .search-ustensiles {
   padding: 25px;
   font-size: 1em;
   border: 1px solid grey;
-  width: 60%;
+  width: 16%;
   height: 69px;
   background: #ed6454;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   position: relative;
+  z-index: 3;
 }
 
-.button-option form.search-ustensiles input[type="search"]:focus-visible {
+.button-option .search-ustensiles:focus-visible {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.button-option form.search-ustensiles input[type="search"]::-webkit-input-placeholder {
+.button-option .search-ustensiles::-webkit-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-ustensiles input[type="search"]:-ms-input-placeholder {
+.button-option .search-ustensiles:-ms-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-ustensiles input[type="search"]::-ms-input-placeholder {
+.button-option .search-ustensiles::-ms-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-ustensiles input[type="search"]::placeholder {
+.button-option .search-ustensiles::placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option form.search-ustensiles button {
+.button-option .btn-ustensiles {
   width: 4%;
   padding: 10px;
   color: white;
@@ -378,34 +412,63 @@ nav form.search-bar button {
   right: 58px;
   background: none;
   bottom: -3px;
+  z-index: 3;
+}
+
+.button-option .sous-menu {
+  padding: 25px;
+  font-size: 1em;
+  border: 1px solid grey;
+  width: 30%;
+  height: auto;
+  background: #3282f7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 2;
+  display: none;
+}
+
+.button-option .sous-menu .btn-ustensiles {
+  background: #68d9a4;
 }
 
 section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   margin-left: 8%;
   margin-right: 8%;
   margin-top: 50px;
 }
 
-.recipes-container {
-  width: 380px;
-  height: 364px;
+section .recipes-container {
+  min-width: 380px;
+  min-height: 364px;
   background: #e7e7e7;
   border-radius: 10px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 30%;
+          flex: 1 0 30%;
+  margin: 10px;
 }
 
-.recipes-container .img {
-  width: 380px;
+section .recipes-container .img {
+  width: auto;
   height: 178px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: #c7bebe;
 }
 
-.recipes-container-infos {
+section .recipes-container-infos {
   margin: 5%;
 }
 
-.recipes-container-infos .recipes-infos {
+section .recipes-container-infos .recipes-infos {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -418,21 +481,21 @@ section {
   margin-bottom: 5%;
 }
 
-.recipes-container-infos .recipes-infos h3 {
+section .recipes-container-infos .recipes-infos h3 {
   font-size: 18px;
   line-height: 22px;
   color: #000;
 }
 
-.recipes-container-infos .recipes-infos .time {
+section .recipes-container-infos .recipes-infos .time {
   font-weight: bold;
 }
 
-.recipes-container-infos .recipes-infos .time i {
+section .recipes-container-infos .recipes-infos .time i {
   font-size: 1.2em;
 }
 
-.recipes {
+section .recipes {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -442,22 +505,22 @@ section {
   font-size: 12px;
 }
 
-.recipes .recipes-composition {
+section .recipes .recipes-composition {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
 }
 
-.recipes .recipes-composition li {
+section .recipes .recipes-composition li {
   font-weight: bold;
   margin-bottom: 5%;
 }
 
-.recipes .recipes-composition span {
+section .recipes .recipes-composition span {
   font-weight: normal;
 }
 
-.recipes .recipes-description {
+section .recipes .recipes-description {
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-flex: 2;
