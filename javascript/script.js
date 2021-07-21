@@ -7,7 +7,7 @@ async function fetchRecipes() {
     .then((data) => recipes(data));
 }
 
-// ================= fonction qui permet de générer le contenu des des recettes=============
+// ================= fonction qui permet de générer le contenu des recettes=============
 function recipes(res) {
   let containerRecipes = [];
   for (let recipe of res.recipes) {
@@ -28,7 +28,7 @@ function generateIngredients(ingredients) {
   return html;
 }
 
-// ========================= fonction qui permet de retourner le contenu des recettes =========
+// ========================= fonction qui permet d'afficher contenu des recettes =========
 
 function recipesDislay(recipe) {
   return `
