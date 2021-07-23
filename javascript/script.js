@@ -22,8 +22,10 @@ function recipes(res) {
 function generateIngredients(ingredients) {
   let acc = [];
   for (let ingredient of ingredients) {
-    console.log(ingredient.ingredient);
-    acc.push(` <li>${ingredient} : <span>80 g</span></li>`);
+    console.log(ingredient.ingredient + " : " + ingredient.quantity);
+    acc.push(
+      ` <li>${ingredient.ingredient} : <span>${ingredient.quantity}</span></li>`
+    );
   }
   let html = acc.reduce((a, l) => a + l);
   return html;
@@ -34,7 +36,7 @@ function generateIngredients(ingredients) {
 function recipesDislay(recipe) {
   return `
         
-      <article class="recipes-container">
+      <article class="recipes-container" data-id="${recipe.id}">
       <div class="img"></div>
       <div class="recipes-container-infos">
         <div class="recipes-infos">
