@@ -1,11 +1,26 @@
 const container = document.querySelector("#container");
+let matchedRecipes = [];
+let dataRecipes = [];
 
 // ================= Fetch ==============================================
 async function fetchRecipes() {
   await fetch("json/recipes.json")
     .then((res) => res.json())
-    .then((data) => recipes(data));
+    .then((data) => (dataRecipes = data.recipes));
+  console.log(dataRecipes);
 }
+
+// ===================== Input principal de recherche ===================
+
+const inputSearch = document.querySelector('input[type="search"]');
+
+inputSearch.addEventListener("input", (e) => {
+  //e.preventDefault();
+
+  if (e.target.value.length >= 3) {
+    console.log(e.target.value);
+  }
+});
 
 // ================= fonction qui permet de générer le contenu des recettes=============
 function recipes(res) {
@@ -22,7 +37,7 @@ function recipes(res) {
 function generateIngredients(ingredients) {
   let acc = [];
   for (let ingredient of ingredients) {
-    console.log(ingredient.ingredient + " : " + ingredient.quantity);
+    //console.log(ingredient.ingredient + " : " + ingredient.quantity);
     acc.push(
       ` <li>${ingredient.ingredient} : <span>${ingredient.quantity}</span></li>`
     );
