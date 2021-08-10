@@ -1,16 +1,13 @@
 const container = document.querySelector("#container");
 let matched_recipes = [];
-let test = [];
+let dataRecipes = [];
 
 // ================= Fetch ==============================================
 async function fetchRecipes() {
   await fetch("json/recipes.json")
     .then((res) => res.json())
-    .then((data) => (test = data.recipes));
-  console.log(test);
+    .then((data) => recipes(data));
 }
-
-console.log(test);
 
 // ===================== Input principal de recherche ===================
 
@@ -25,6 +22,14 @@ inputSearch.addEventListener("input", (e) => {
 });
 
 // ================= fonction qui permet de générer le contenu des recettes=============
+function recipes(res) {
+  let containerRecipes = [];
+  for (let recipe of res.recipes) {
+    containerRecipes.push(recipesDislay(recipe));
+  }
+  let html = containerRecipes.reduce((a, l) => a + l);
+  container.innerHTML = html;
+}
 
 // ==================== fonction qui permet de générer les ingredients dans le li =======
 
@@ -87,15 +92,5 @@ btnIngredient.addEventListener("click", () => {
   document.querySelector(".search-ingredient").placeholder =
     "Rechercher un ingrédient";
 });
-
-function recipes() {
-  let containerRecipes = [];
-  for (let recipe of test) {
-    containerRecipes.push(recipesDislay(recipe));
-  }
-  let html = containerRecipes.reduce((a, l) => a + l);
-  container.innerHTML = html;
-  console.log(containerRecipes);
-}
 
 fetchRecipes();
