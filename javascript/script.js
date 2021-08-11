@@ -1,13 +1,10 @@
 const container = document.querySelector("#container");
 let matched_recipes = [];
-let dataRecipes = [];
 
 // ================= Fetch ==============================================
-async function fetchRecipes() {
-  await fetch("json/recipes.json")
-    .then((res) => res.json())
-    .then((data) => recipes(data));
-}
+fetch("json/recipes.json")
+  .then((res) => res.json())
+  .then((data) => recipes(data));
 
 // ===================== Input principal de recherche ===================
 
@@ -36,7 +33,7 @@ function recipes(res) {
 function generateIngredients(ingredients) {
   let acc = [];
   for (let ingredient of ingredients) {
-    //console.log(ingredient.ingredient + " : " + ingredient.quantity);
+    console.log(ingredient.ingredient + " : " + ingredient.quantity);
     acc.push(
       ` <li>${ingredient.ingredient} : <span>${ingredient.quantity}</span></li>`
     );
@@ -92,5 +89,11 @@ btnIngredient.addEventListener("click", () => {
   document.querySelector(".search-ingredient").placeholder =
     "Rechercher un ingrédient";
 });
+/*
 
-fetchRecipes();
+var chaine = "1 2 6 8 2 1 6 9 8 2 4 2 3 6 2";
+alert(
+  "le nombre 2 est présent " +
+    (chaine.split("2").length - 1 + " fois dans la chaine")
+);
+*/
