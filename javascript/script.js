@@ -1,26 +1,6 @@
 const container = document.querySelector("#container");
 
-<<<<<<< HEAD
 let recipesJson; //
-=======
-// ================= Fetch ==============================================
-async function fetchRecipes() {
-  await fetch("json/recipes.json")
-    .then((res) => res.json())
-    .then((data) => {
-      test = data.recipes;
-      displayRecipes(test);
-      t();
-    });
-}
-
-// ===================== Input principal de recherche ===================
-
-const inputSearch = document.querySelector('input[type="search"]');
-
-inputSearch.addEventListener("input", (e) => {
-  //e.preventDefault();
->>>>>>> d70706bfecce2f857dd9a988f19e29b0a74dcf52
 
 // ================= Fetch ==============================================
 async function fetchRecipes() {
@@ -36,11 +16,7 @@ async function fetchRecipes() {
 // ================= fonction qui permet de générer le contenu des recettes=============
 function displayRecipes() {
   let containerRecipes = [];
-<<<<<<< HEAD
   for (let recipe of recipesJson) {
-=======
-  for (let recipe of test) {
->>>>>>> d70706bfecce2f857dd9a988f19e29b0a74dcf52
     containerRecipes.push(templateRecipe(recipe));
   }
   let html = containerRecipes.reduce((a, l) => a + l);
