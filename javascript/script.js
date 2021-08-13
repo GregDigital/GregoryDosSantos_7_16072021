@@ -1,31 +1,54 @@
 const container = document.querySelector("#container");
-let matched_recipes = [];
+
+let recipesJson; //
 
 // ================= Fetch ==============================================
-fetch("json/recipes.json")
-  .then((res) => res.json())
-  .then((data) => recipes(data));
-
-// ===================== Input principal de recherche ===================
-
-const inputSearch = document.querySelector('input[type="search"]');
-
-inputSearch.addEventListener("input", (e) => {
-  //e.preventDefault();
-
-  if (e.target.value.length >= 3) {
-    console.log(e.target.value);
-  }
-});
+async function fetchRecipes() {
+  await fetch("json/recipes.json")
+    .then((res) => res.json())
+    .then((data) => {
+      recipesJson = data.recipes;
+      displayRecipes(recipesJson);
+      inputSearch();
+    });
+}
 
 // ================= fonction qui permet de générer le contenu des recettes=============
-function recipes(res) {
+function displayRecipes() {
   let containerRecipes = [];
-  for (let recipe of res.recipes) {
-    containerRecipes.push(recipesDislay(recipe));
+  for (let recipe of recipesJson) {
+    containerRecipes.push(templateRecipe(recipe));
   }
   let html = containerRecipes.reduce((a, l) => a + l);
   container.innerHTML = html;
+}
+// ===================== Input principal de recherche ===================
+
+function inputSearch() {
+  const inputSearch = document.querySelector('input[type="search"]');
+
+  inputSearch.addEventListener("input", (e) => {
+    const dataId = document.querySelectorAll("[data-id]");
+
+    //  console.log(dataId);
+    let valueInput = e.target.value;
+
+    if (valueInput.length >= 3) {
+      let value = Object.keys(recipesJson);
+
+      for (let i = 0; i < value.length; i++) {
+        let description = recipesJson[value[i]].description;
+        let verifOccurrences = description.includes(valueInput); // test occurences des mots dans la description des recettes et l'input
+        let matched_recipes = []; // tableau vide pour recuperer les recettes ayant le mot correspondant
+        let index = 0;
+        if (verifOccurrences == true) {
+          index++;
+          matched_recipes.push(index);
+          console.log(matched_recipes);
+        }
+      }
+    }
+  });
 }
 
 // ==================== fonction qui permet de générer les ingredients dans le li =======
@@ -33,7 +56,7 @@ function recipes(res) {
 function generateIngredients(ingredients) {
   let acc = [];
   for (let ingredient of ingredients) {
-    console.log(ingredient.ingredient + " : " + ingredient.quantity);
+    // console.log(ingredient.ingredient);
     acc.push(
       ` <li>${ingredient.ingredient} : <span>${ingredient.quantity}</span></li>`
     );
@@ -44,7 +67,7 @@ function generateIngredients(ingredients) {
 
 // ========================= fonction qui permet d'afficher contenu des recettes =========
 
-function recipesDislay(recipe) {
+function templateRecipe(recipe) {
   return `
         
       <article class="recipes-container" data-id="${recipe.id}">
@@ -89,11 +112,5 @@ btnIngredient.addEventListener("click", () => {
   document.querySelector(".search-ingredient").placeholder =
     "Rechercher un ingrédient";
 });
-/*
 
-var chaine = "1 2 6 8 2 1 6 9 8 2 4 2 3 6 2";
-alert(
-  "le nombre 2 est présent " +
-    (chaine.split("2").length - 1 + " fois dans la chaine")
-);
-*/
+fetchRecipes();
