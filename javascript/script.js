@@ -30,7 +30,6 @@ function inputSearch() {
   inputSearch.addEventListener("input", (e) => {
     const dataId = document.querySelectorAll("[data-id]");
 
-    //  console.log(dataId);
     let valueInput = e.target.value;
 
     if (valueInput.length >= 3) {
