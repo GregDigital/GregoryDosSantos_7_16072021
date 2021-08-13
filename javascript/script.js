@@ -2,9 +2,15 @@ const container = document.querySelector("#container");
 let matched_recipes = [];
 
 // ================= Fetch ==============================================
-fetch("json/recipes.json")
-  .then((res) => res.json())
-  .then((data) => recipes(data));
+async function fetchRecipes() {
+  await fetch("json/recipes.json")
+    .then((res) => res.json())
+    .then((data) => {
+      test = data.recipes;
+      displayRecipes(test);
+      t();
+    });
+}
 
 // ===================== Input principal de recherche ===================
 
@@ -19,13 +25,17 @@ inputSearch.addEventListener("input", (e) => {
 });
 
 // ================= fonction qui permet de générer le contenu des recettes=============
-function recipes(res) {
+function displayRecipes() {
   let containerRecipes = [];
-  for (let recipe of res.recipes) {
-    containerRecipes.push(recipesDislay(recipe));
+  for (let recipe of test) {
+    containerRecipes.push(templateRecipe(recipe));
   }
   let html = containerRecipes.reduce((a, l) => a + l);
   container.innerHTML = html;
+}
+
+function t() {
+  console.log(test[length].ingredients);
 }
 
 // ==================== fonction qui permet de générer les ingredients dans le li =======
@@ -44,7 +54,7 @@ function generateIngredients(ingredients) {
 
 // ========================= fonction qui permet d'afficher contenu des recettes =========
 
-function recipesDislay(recipe) {
+function templateRecipe(recipe) {
   return `
         
       <article class="recipes-container" data-id="${recipe.id}">
@@ -89,11 +99,5 @@ btnIngredient.addEventListener("click", () => {
   document.querySelector(".search-ingredient").placeholder =
     "Rechercher un ingrédient";
 });
-/*
 
-var chaine = "1 2 6 8 2 1 6 9 8 2 4 2 3 6 2";
-alert(
-  "le nombre 2 est présent " +
-    (chaine.split("2").length - 1 + " fois dans la chaine")
-);
-*/
+fetchRecipes();
