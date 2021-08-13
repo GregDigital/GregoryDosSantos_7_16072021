@@ -50,10 +50,6 @@ function inputSearch() {
   });
 }
 
-function t() {
-  console.log(test[length].ingredients);
-}
-
 // ==================== fonction qui permet de générer les ingredients dans le li =======
 
 function generateIngredients(ingredients) {
