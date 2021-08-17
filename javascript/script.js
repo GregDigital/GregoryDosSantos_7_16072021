@@ -12,6 +12,14 @@ async function fetchRecipes() {
       sortRecipes();
     });
 }
+function displayRecipes() {
+  let containerRecipes = [];
+  for (let recipe of recipesJson) {
+    containerRecipes.push(templateRecipe(recipe));
+  }
+  let html = containerRecipes.reduce((a, l) => a + l);
+  container.innerHTML = html;
+}
 
 // ================= fonction qui permet de générer le contenu des recettes=============
 
@@ -21,45 +29,33 @@ const inputSearch = document.querySelector('input[type="search"]');
 function sortRecipes() {
   inputSearch.addEventListener("input", (e) => {
     let valueInput = e.target.value;
-    const dataId = document.querySelectorAll("[data-id]");
-    console.log(dataId);
-    if (valueInput.length >= 3) {
-      dataId.forEach((element) => {
-        element.style.visibility = "hidden";
-      });
-      //
-      let value = Object.keys(recipesJson);
-      for (let i = 0; i < value.length; i++) {
-        let description = recipesJson[value[i]].description;
-        let verifOccurrences = description.includes(valueInput); // test occurences des mots dans la description des recettes et l'input
-        let matched_recipes = []; // tableau vide pour recuperer les recettes ayant le mot correspondant
-        let index = 0;
-        let id = recipesJson[value[i]].id;
-        if (verifOccurrences == true) {
-          let arrayId = id++;
-          console.log(arrayId);
+    const articlesRecipes = document.querySelectorAll("[data-id]");
 
-          matched_recipes.push(arrayId);
-          console.log(matched_recipes);
+    articlesRecipes.forEach((article) => {
+      if (valueInput.length >= 3) {
+        article.style.display = "none";
+        //
+        let value = Object.keys(recipesJson);
+        for (let i = 0; i < value.length; i++) {
+          let description = recipesJson[value[i]].description;
+          let verifOccurrences = description.includes(valueInput); // test occurences des mots dans la description des recettes et l'input
+          let matched_recipes = []; // tableau vide pour recuperer les recettes ayant le mot correspondant
+          let id = recipesJson[value[i]].id;
+
+          if (verifOccurrences == true) {
+            let arrayId = id++;
+
+            matched_recipes.push(arrayId);
+            if (article.dataset.id == matched_recipes) {
+              article.style.display = "block";
+            }
+          }
         }
-
-        //displayRecipes(matched_recipes);
-      }
-    } else {
-      dataId.forEach((element) => {
-        element.style.visibility = "visible";
-      });
-    }
+      } else {
+        article.style.visibility = "block";
+      } // fin else
+    });
   });
-}
-
-function displayRecipes() {
-  let containerRecipes = [];
-  for (let recipe of recipesJson) {
-    containerRecipes.push(templateRecipe(recipe));
-  }
-  let html = containerRecipes.reduce((a, l) => a + l);
-  container.innerHTML = html;
 }
 
 /*function inputSearch() {
