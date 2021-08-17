@@ -24,9 +24,9 @@ function displayRecipes() {
 // ================= fonction qui permet de générer le contenu des recettes=============
 
 // ===================== Input principal de recherche ===================
-const inputSearch = document.querySelector('input[type="search"]');
 
 function sortRecipes() {
+  const inputSearch = document.querySelector('input[type="search"]');
   inputSearch.addEventListener("input", (e) => {
     let valueInput = e.target.value;
     const articlesRecipes = document.querySelectorAll("[data-id]");
