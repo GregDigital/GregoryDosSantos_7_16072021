@@ -27,6 +27,7 @@ function displayRecipes() {
 
 function sortRecipes() {
   const inputSearch = document.querySelector('input[type="search"]');
+  let notFound = document.querySelector("#recipes-no-found");
   inputSearch.addEventListener("input", (e) => {
     let valueInput = e.target.value;
     const articlesRecipes = document.querySelectorAll("[data-id]");
@@ -37,6 +38,8 @@ function sortRecipes() {
         //
         let value = Object.keys(recipesJson);
         for (let i = 0; i < value.length; i++) {
+          let appliance = recipesJson[value[i]].appliance;
+          let ustensils = recipesJson[value[i]].ustensils;
           let description = recipesJson[value[i]].description;
           let verifOccurrences = description.includes(valueInput); // test occurences des mots dans la description des recettes et l'input
           let matched_recipes = []; // tableau vide pour recuperer les recettes ayant le mot correspondant
@@ -44,16 +47,28 @@ function sortRecipes() {
 
           if (verifOccurrences == true) {
             let arrayId = id++;
-
+            notFound.style.display = "none";
             matched_recipes.push(arrayId);
             if (article.dataset.id == matched_recipes) {
               article.style.display = "block";
             }
+          } else if (verifOccurrences == false) {
+            // On affiche le message d'erreur NO FOUND
+            let i = document.querySelectorAll("recipes-container");
+
+            i.forEach((element) => {
+              element.classList.add("recipes-container_none");
+            });
+            notFound.style.display = "block";
           }
         }
+      } else if (valueInput.length < 3) {
+        displayRecipes();
+        notFound.style.display = "none";
       } else {
-        article.style.visibility = "block";
-      } // fin else
+        notFound.style.display = "none";
+      }
+      // fin else
     });
   });
 }
@@ -132,6 +147,7 @@ function templateRecipe(recipe) {
         </div>
       </div>
     </article>
+    
       `;
 }
 
