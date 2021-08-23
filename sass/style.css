@@ -527,4 +527,23 @@ section .recipes .recipes-description {
       -ms-flex: 2;
           flex: 2;
 }
+
+.recipes-container_none {
+  display: none;
+}
+
+#recipes-no-found {
+  display: none;
+  background: #e7e7e7;
+  padding: 2rem;
+  margin: 0;
+  font-family: "Lato";
+  font-size: 1rem;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+#recipes-no-found p {
+  text-align: center;
+}
 /*# sourceMappingURL=style.css.map */
