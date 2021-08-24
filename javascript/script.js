@@ -74,7 +74,7 @@ function searchMatchRecipe(recipe, valueInput, regex) {
   let { name, ingredients, description, appliance, ustensils } = recipe;
   let result = (
     name +
-    ingredients[ingredient] +
+    ingredients +
     description +
     appliance +
     ustensils
