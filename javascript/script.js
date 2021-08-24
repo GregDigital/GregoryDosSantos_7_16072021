@@ -40,7 +40,9 @@ function sortRecipes() {
   const inputSearch = document.querySelector('input[type="search"]');
   let notFound = document.querySelector("#recipes-no-found");
   inputSearch.addEventListener("input", (e) => {
-    let valueInput = e.target.value;
+    let regex = /^([a-zA-Z]+( [a-zA-Z]+)+)$/i;
+    let valueInput = e.target.value; // mettre en minuscule
+
     const articlesRecipes = document.querySelector("[data-id]");
 
     let matched_recipes = []; // tableau vide pour recuperer les recettes ayant le mot correspondant
@@ -50,7 +52,7 @@ function sortRecipes() {
       recipesJson.forEach((recipe) => {
         //
 
-        let verifOccurrences = searchMatchRecipe(recipe, valueInput);
+        let verifOccurrences = searchMatchRecipe(recipe, valueInput, regex);
 
         // test occurences des mots dans la description des recettes et l'input
 
@@ -66,9 +68,16 @@ function sortRecipes() {
   });
 }
 
-function searchMatchRecipe(recipe, valueInput) {
-  let { appliance, ustensils, description, ingredients } = recipe;
-  let result = description.includes(valueInput);
+function searchMatchRecipe(recipe, valueInput, regex) {
+  let { name, ingredients, description, appliance, ustensils } = recipe;
+  let result = (
+    name +
+    ingredients +
+    description +
+    appliance +
+    ustensils
+  ).includes(valueInput, regex);
+
   return result;
 }
 
@@ -133,6 +142,9 @@ btnIngredient.addEventListener("click", () => {
   document.getElementById("i").classList.remove("fa-chevron-down");
   document.querySelector(".search-ingredient").placeholder =
     "Rechercher un ingrédient";
+  body.addEventListener("click", () => {
+    document.querySelector(".btn-ingredient");
+  });
 });
 
 fetchRecipes();
