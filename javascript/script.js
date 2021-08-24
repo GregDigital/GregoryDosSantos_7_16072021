@@ -66,7 +66,7 @@ function sortRecipes() {
     } else if (valueInput.length < 3) {
       displayRecipes(recipesJson);
     }
-    // fin else
+    // fin else ---
   });
 }
 
