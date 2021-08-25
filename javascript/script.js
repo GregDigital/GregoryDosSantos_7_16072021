@@ -43,7 +43,8 @@ function sortRecipes() {
     let valueInput = e.target.value; // mettre en minuscule
     if (valueInput.length >= 3) {
       if (valueInput) {
-        let regex = /^([a-zA-Z]+( [a-zA-Z]+)+)$/i;
+        console.log(valueInput);
+        let regex = /[A-Z]/g;
 
         const articlesRecipes = document.querySelector("[data-id]");
 
@@ -53,6 +54,7 @@ function sortRecipes() {
         recipesJson.forEach((recipe) => {
           //
 
+          console.log(recipe);
           let verifOccurrences = searchMatchRecipe(recipe, valueInput, regex);
 
           // test occurences des mots dans la description des recettes et l'input
@@ -74,11 +76,20 @@ function searchMatchRecipe(recipe, valueInput, regex) {
   let { name, ingredients, description, appliance, ustensils } = recipe;
   let result = (
     name +
-    ingredients +
+    ingredients[[i].ingredient] +
     description +
     appliance +
     ustensils
-  ).includes(valueInput, regex);
+  )
+    .toLowerCase()
+    .replace(/[èéêë]/, "e")
+    .replace(/[àáâãäå]/, "a")
+    .replace(/[òóôõö]/, "o")
+    .replace(/[ùúûü]/, "u")
+    .replace(/[ùúûü]/, "u")
+    .replace(/[ìíîï]/, "i")
+    .replace(/[ç]/, "c")
+    .includes(valueInput, regex);
 
   return result;
 }
