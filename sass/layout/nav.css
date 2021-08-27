@@ -49,6 +49,13 @@ nav form.search-bar button {
   right: 69px;
 }
 
+.ingredient {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .button-option {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -56,68 +63,66 @@ nav form.search-bar button {
   margin-left: 8%;
   margin-right: 8%;
   margin-top: 50px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
-.button-option .search-ingredient {
+.search-ingredient {
   padding: 25px;
   font-size: 1em;
   border: 1px solid grey;
-  width: 16%;
+  width: 44%;
   height: 69px;
   background: #3282f7;
   color: white;
   border: none;
-  border-radius: 5px;
-  position: relative;
-  z-index: 3;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
-.button-option .search-ingredient:focus-visible {
+.search-ingredient:focus-visible {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.button-option .search-ingredient::-webkit-input-placeholder {
+.search-ingredient::-webkit-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option .search-ingredient:-ms-input-placeholder {
+.search-ingredient:-ms-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option .search-ingredient::-ms-input-placeholder {
+.search-ingredient::-ms-input-placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option .search-ingredient::placeholder {
+.search-ingredient::placeholder {
   color: white;
   opacity: 1;
   font-size: 1em;
 }
 
-.button-option .btn-ingredient {
-  width: 4%;
-  padding: 10px;
+.btn-ingredient {
+  height: 69px;
   color: white;
   font-size: 1.3em;
   border: none;
   cursor: pointer;
-  position: absolute;
-  position: relative;
-  right: 58px;
-  background: none;
-  bottom: -3px;
-  z-index: 3;
+  background: #3282f7;
+  padding: 10px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
-.button-option .content-ingredient {
+.content-ingredient {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -130,7 +135,7 @@ nav form.search-bar button {
   margin-top: 10%;
 }
 
-.button-option .content-ingredient ul {
+.content-ingredient .ingredients {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -141,145 +146,238 @@ nav form.search-bar button {
           justify-content: center;
 }
 
-.button-option .content-ingredient li {
+.content-ingredient .ingredients li {
   width: 100px;
   margin-bottom: 2%;
 }
 
-.button-option .search-appareil {
+.sous-menu {
   padding: 25px;
   font-size: 1em;
   border: 1px solid grey;
-  width: 16%;
-  height: 69px;
-  background: #68d9a4;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  position: relative;
-  z-index: 3;
-}
-
-.button-option .search-appareil:focus-visible {
-  outline: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.button-option .search-appareil::-webkit-input-placeholder {
-  color: white;
-  opacity: 1;
-  font-size: 1em;
-}
-
-.button-option .search-appareil:-ms-input-placeholder {
-  color: white;
-  opacity: 1;
-  font-size: 1em;
-}
-
-.button-option .search-appareil::-ms-input-placeholder {
-  color: white;
-  opacity: 1;
-  font-size: 1em;
-}
-
-.button-option .search-appareil::placeholder {
-  color: white;
-  opacity: 1;
-  font-size: 1em;
-}
-
-.button-option .btn-appareil {
-  width: 4%;
-  padding: 10px;
-  color: white;
-  font-size: 1.3em;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  position: relative;
-  right: 58px;
-  background: none;
-  bottom: -3px;
-  z-index: 3;
-}
-
-.button-option .search-ustensiles {
-  padding: 25px;
-  font-size: 1em;
-  border: 1px solid grey;
-  width: 16%;
-  height: 69px;
-  background: #ed6454;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  position: relative;
-  z-index: 3;
-}
-
-.button-option .search-ustensiles:focus-visible {
-  outline: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.button-option .search-ustensiles::-webkit-input-placeholder {
-  color: white;
-  opacity: 1;
-  font-size: 1em;
-}
-
-.button-option .search-ustensiles:-ms-input-placeholder {
-  color: white;
-  opacity: 1;
-  font-size: 1em;
-}
-
-.button-option .search-ustensiles::-ms-input-placeholder {
-  color: white;
-  opacity: 1;
-  font-size: 1em;
-}
-
-.button-option .search-ustensiles::placeholder {
-  color: white;
-  opacity: 1;
-  font-size: 1em;
-}
-
-.button-option .btn-ustensiles {
-  width: 4%;
-  padding: 10px;
-  color: white;
-  font-size: 1.3em;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  position: relative;
-  right: 58px;
-  background: none;
-  bottom: -3px;
-  z-index: 3;
-}
-
-.button-option .sous-menu {
-  padding: 25px;
-  font-size: 1em;
-  border: 1px solid grey;
-  width: 30%;
+  width: 100%;
   height: auto;
   background: #3282f7;
   color: white;
   border: none;
   border-radius: 5px;
   position: absolute;
-  z-index: 2;
+  top: 60px;
   display: none;
+  z-index: 3;
 }
 
-.button-option .sous-menu .btn-ustensiles {
+.appareils {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.search-appareil {
+  padding: 25px;
+  font-size: 1em;
+  border: 1px solid grey;
+  width: 44%;
+  height: 69px;
   background: #68d9a4;
+  color: white;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.search-appareil:focus-visible {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.search-appareil::-webkit-input-placeholder {
+  color: white;
+  opacity: 1;
+  font-size: 1em;
+}
+
+.search-appareil:-ms-input-placeholder {
+  color: white;
+  opacity: 1;
+  font-size: 1em;
+}
+
+.search-appareil::-ms-input-placeholder {
+  color: white;
+  opacity: 1;
+  font-size: 1em;
+}
+
+.search-appareil::placeholder {
+  color: white;
+  opacity: 1;
+  font-size: 1em;
+}
+
+.btn-appareil {
+  height: 69px;
+  color: white;
+  font-size: 1.3em;
+  border: none;
+  cursor: pointer;
+  background: #68d9a4;
+  padding: 10px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.sous-menu-appareil {
+  padding: 25px;
+  font-size: 1em;
+  border: 1px solid grey;
+  width: 100%;
+  height: auto;
+  background: #68d9a4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  top: 60px;
+  display: none;
+  z-index: 4;
+}
+
+.content-appareil {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 10%;
+}
+
+.content-appareil .appareil {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.content-appareil .appareil li {
+  width: 100px;
+  margin-bottom: 2%;
+}
+
+.ustensiles {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.search-ustensiles {
+  padding: 25px;
+  font-size: 1em;
+  border: 1px solid grey;
+  width: 44%;
+  height: 69px;
+  background: #ed6454;
+  color: white;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.search-ustensiles:focus-visible {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.search-ustensiles::-webkit-input-placeholder {
+  color: white;
+  opacity: 1;
+  font-size: 1em;
+}
+
+.search-ustensiles:-ms-input-placeholder {
+  color: white;
+  opacity: 1;
+  font-size: 1em;
+}
+
+.search-ustensiles::-ms-input-placeholder {
+  color: white;
+  opacity: 1;
+  font-size: 1em;
+}
+
+.search-ustensiles::placeholder {
+  color: white;
+  opacity: 1;
+  font-size: 1em;
+}
+
+.btn-ustensiles {
+  background: #ed6454;
+  height: 69px;
+  color: white;
+  font-size: 1.3em;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.sous-menu-ustensiles {
+  padding: 25px;
+  font-size: 1em;
+  border: 1px solid grey;
+  width: 100%;
+  height: auto;
+  background: #ed6454;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  top: 60px;
+  display: none;
+  z-index: 5;
+}
+
+.content-ustensiles {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 10%;
+}
+
+.content-ustensiles .ustensile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.content-ustensiles .ustensile li {
+  width: 100px;
+  margin-bottom: 2%;
 }
 /*# sourceMappingURL=nav.css.map */

@@ -43,7 +43,8 @@ function sortRecipes() {
     let valueInput = e.target.value; // mettre en minuscule
     if (valueInput.length >= 3) {
       if (valueInput) {
-        let regex = /^([a-zA-Z]+( [a-zA-Z]+)+)$/i;
+        console.log(valueInput);
+        let regex = /[A-Z]/g;
 
         const articlesRecipes = document.querySelector("[data-id]");
 
@@ -53,6 +54,7 @@ function sortRecipes() {
         recipesJson.forEach((recipe) => {
           //
 
+          console.log(recipe);
           let verifOccurrences = searchMatchRecipe(recipe, valueInput, regex);
 
           // test occurences des mots dans la description des recettes et l'input
@@ -74,11 +76,20 @@ function searchMatchRecipe(recipe, valueInput, regex) {
   let { name, ingredients, description, appliance, ustensils } = recipe;
   let result = (
     name +
-    ingredients +
+    ingredients[[i].ingredient] +
     description +
     appliance +
     ustensils
-  ).includes(valueInput, regex);
+  )
+    .toLowerCase()
+    .replace(/[èéêë]/, "e")
+    .replace(/[àáâãäå]/, "a")
+    .replace(/[òóôõö]/, "o")
+    .replace(/[ùúûü]/, "u")
+    .replace(/[ùúûü]/, "u")
+    .replace(/[ìíîï]/, "i")
+    .replace(/[ç]/, "c")
+    .includes(valueInput, regex);
 
   return result;
 }
@@ -134,19 +145,44 @@ function templateRecipe(recipe) {
 const btnIngredient = document.querySelector(".btn-ingredient");
 const inputIngredient = document.querySelector(".search-ingredient");
 const sousMenu = document.querySelector(".sous-menu");
-const body = document.querySelector("body");
 const up = document.querySelector("#i");
 
 btnIngredient.addEventListener("click", () => {
-  inputIngredient.style.width = "39%";
+  inputIngredient.style.width = "100%";
   sousMenu.style.display = "block";
   document.getElementById("i").classList.add("fa-chevron-up");
   document.getElementById("i").classList.remove("fa-chevron-down");
   document.querySelector(".search-ingredient").placeholder =
     "Rechercher un ingrédient";
-  body.addEventListener("click", () => {
-    document.querySelector(".btn-ingredient");
-  });
 });
 
+// ===========================  Button Appareil  ======================
+
+const btnAppareil = document.querySelector(".btn-appareil");
+const inputAppareil = document.querySelector(".search-appareil");
+const sousMenuAppareil = document.querySelector(".sous-menu-appareil");
+
+btnAppareil.addEventListener("click", () => {
+  inputAppareil.style.width = "130%";
+  sousMenuAppareil.style.display = "block";
+  document.getElementById("i").classList.add("fa-chevron-up");
+  document.getElementById("i").classList.remove("fa-chevron-down");
+  document.getElementById("search-appareil").placeholder =
+    "Rechercher un appareil";
+});
+
+// ===========================  Button ustensiles ======================
+
+const btnUstensile = document.querySelector(".btn-ustensiles");
+const inputUstensile = document.querySelector(".search-ustensiles");
+const sousMenuUstensile = document.querySelector(".sous-menu-ustensiles");
+
+btnUstensile.addEventListener("click", () => {
+  inputUstensile.style.width = "130%";
+  sousMenuUstensile.style.display = "block";
+  document.getElementById("i").classList.add("fa-chevron-up");
+  document.getElementById("i").classList.remove("fa-chevron-down");
+  document.getElementById("search-ustensiles").placeholder =
+    "Rechercher un Ustensiles";
+});
 fetchRecipes();
