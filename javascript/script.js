@@ -41,25 +41,23 @@ function sortRecipes() {
   let notFound = document.querySelector("#recipes-no-found");
   inputSearch.addEventListener("input", (e) => {
     let valueInput = e.target.value; // mettre en minuscule
+
     if (valueInput.length >= 3) {
+      let inputs = valueInput.split(" ");
+
+      let matched_recipes = [];
       if (valueInput) {
         console.log(valueInput);
-        let regex = /[A-Z]/g;
-
-        const articlesRecipes = document.querySelector("[data-id]");
-
-        let matched_recipes = []; // tableau vide pour recuperer les recettes ayant le mot correspondant
-        // article.style.display = "none";
 
         recipesJson.forEach((recipe) => {
           //
 
           console.log(recipe);
-          let verifOccurrences = searchMatchRecipe(recipe, valueInput, regex);
+          let matched = inputs.every((input) =>
+            searchMatchRecipe(recipe, input)
+          );
 
-          // test occurences des mots dans la description des recettes et l'input
-
-          if (verifOccurrences == true) {
+          if (matched == true) {
             matched_recipes.push(recipe);
           }
         });
@@ -68,11 +66,11 @@ function sortRecipes() {
     } else if (valueInput.length < 3) {
       displayRecipes(recipesJson);
     }
-    // fin else ---
   });
 }
-
-function searchMatchRecipe(recipe, valueInput, regex) {
+/*
+function searchMatchRecipe(recipe, valueInput) {
+  let regex = /[A-Z]/g;
   let { name, ingredients, description, appliance, ustensils } = recipe;
   let result = (
     name +
@@ -92,6 +90,24 @@ function searchMatchRecipe(recipe, valueInput, regex) {
     .includes(valueInput, regex);
 
   return result;
+}
+*/
+function searchMatchRecipe(recipe, valueInput) {
+  let { name, ingredients, description, appliance, ustensils } = recipe;
+  let regex = new RegExp(valueInput, "i");
+
+  if (regex.test(name)) return true;
+
+  let ing_words = ingredients
+    .map((e) => e.ingredient.split(" "))
+    .flat()
+    .join(" ");
+
+  if (regex.test(ing_words)) return true;
+
+  if (regex.test(description)) return true;
+
+  return false;
 }
 
 // ==================== fonction qui permet de générer les ingredients dans le li =======
