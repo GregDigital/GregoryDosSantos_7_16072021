@@ -99,9 +99,11 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    li {
-      width: 100px;
-      margin-bottom: 2%;
+    flex-direction: column;
+
+    a {
+      text-decoration: none;
+      color: white;
     }
   }
 }
