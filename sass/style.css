@@ -424,9 +424,9 @@ nav form.search-bar button {
           justify-content: center;
 }
 
-.content-appareil .appareil li {
-  width: 100px;
-  margin-bottom: 2%;
+.content-appareil .appareil a {
+  text-decoration: none;
+  color: white;
 }
 
 .ustensiles {
@@ -531,9 +531,9 @@ nav form.search-bar button {
           justify-content: center;
 }
 
-.content-ustensiles .ustensile li {
-  width: 100px;
-  margin-bottom: 2%;
+.content-ustensiles .ustensile a {
+  text-decoration: none;
+  color: white;
 }
 
 section {

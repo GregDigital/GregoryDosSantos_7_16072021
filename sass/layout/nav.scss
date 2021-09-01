@@ -192,9 +192,9 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    li {
-      width: 100px;
-      margin-bottom: 2%;
+    a {
+      text-decoration: none;
+      color: white;
     }
   }
 }
@@ -267,9 +267,9 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    li {
-      width: 100px;
-      margin-bottom: 2%;
+    a {
+      text-decoration: none;
+      color: white;
     }
   }
 }
