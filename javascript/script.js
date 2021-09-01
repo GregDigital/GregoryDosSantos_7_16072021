@@ -2,6 +2,12 @@ const container = document.querySelector("#container");
 
 let recipesJson; //
 
+let INGREDIENTS = [];
+let USTENSILS = [];
+let APPLIANCE = [];
+
+let activeIngredients = [];
+
 // ================= Fetch ==============================================
 async function fetchRecipes() {
   await fetch("json/recipes.json")
@@ -10,9 +16,16 @@ async function fetchRecipes() {
       recipesJson = data.recipes;
       displayRecipes(recipesJson);
       sortRecipes();
-      showIngredients();
-      showUstensils();
-      showAppliance();
+
+      INGREDIENTS = getIngredients();
+      USTENSILS = getUstensils();
+      APPLIANCE = getAppliance();
+
+      /*
+      TODO : 
+      Afficher les ingredients et ajouter un events au click
+
+      */
     });
 }
 function displayRecipes(recipes) {
@@ -152,11 +165,12 @@ btnIngredient.addEventListener("click", () => {
     "Rechercher un ingrédient";
 });
 
-function showIngredients() {
+function getIngredients() {
   let ingredients = recipesJson.map((elt) => elt.ingredients);
 
   let deleteDuplicates = Array.from(new Set(ingredients));
   // console.log(deleteDuplicates);
+  return deleteDuplicates;
 }
 
 // ===========================  Button Appareil  ======================
@@ -174,11 +188,11 @@ btnAppareil.addEventListener("click", () => {
     "Rechercher un appareil";
 });
 
-function showAppliance() {
+function getAppliance() {
   let appliances = recipesJson.map((elt) => elt.appliance).flat();
 
-  let deleteDuplicates = Array.from(new Set(appliances));
-  //console.log(deleteDuplicates);
+  let arrayAppliances = Array.from(new Set(appliances));
+  console.log(arrayAppliances);
 }
 
 // ===========================  Button ustensiles ======================
@@ -196,11 +210,27 @@ btnUstensile.addEventListener("click", () => {
     "Rechercher un Ustensiles";
 });
 
-function showUstensils() {
+function getUstensils() {
+  let containerUl = document.querySelector(".ustensile");
   let ustensils = recipesJson.map((recipe) => recipe.ustensils).flat();
+  let arrayUstensils = Array.from(new Set(ustensils));
 
-  let deleteDuplicates = Array.from(new Set(ustensils));
-  console.log(deleteDuplicates);
+  for (let i = 0; i < arrayUstensils.length; i++) {
+    let elt = arrayUstensils[i];
+
+    USTENSILS.push(`
+    <li><a href="#" id="">${elt}</a></li>
+    `);
+  }
+  let html = USTENSILS.reduce((a, l) => a + l);
+  containerUl.innerHTML = html;
 }
 
+function displayIngredients() {}
+
 fetchRecipes();
+
+/*
+ function displayIngredients() { }
+ function displayActiveIngredients() {} 
+*/

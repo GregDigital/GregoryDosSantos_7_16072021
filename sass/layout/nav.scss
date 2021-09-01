@@ -261,12 +261,14 @@ nav {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  margin-top: 10%;
 
   .ustensile {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    li {
+      margin: 2px;
+    }
     a {
       text-decoration: none;
       color: white;
