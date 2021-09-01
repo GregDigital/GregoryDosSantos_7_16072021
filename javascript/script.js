@@ -10,6 +10,9 @@ async function fetchRecipes() {
       recipesJson = data.recipes;
       displayRecipes(recipesJson);
       sortRecipes();
+      showIngredients();
+      showUstensils();
+      showAppliance();
     });
 }
 function displayRecipes(recipes) {
@@ -68,30 +71,7 @@ function sortRecipes() {
     }
   });
 }
-/*
-function searchMatchRecipe(recipe, valueInput) {
-  let regex = /[A-Z]/g;
-  let { name, ingredients, description, appliance, ustensils } = recipe;
-  let result = (
-    name +
-    ingredients[[i].ingredient] +
-    description +
-    appliance +
-    ustensils
-  )
-    .toLowerCase()
-    .replace(/[èéêë]/, "e")
-    .replace(/[àáâãäå]/, "a")
-    .replace(/[òóôõö]/, "o")
-    .replace(/[ùúûü]/, "u")
-    .replace(/[ùúûü]/, "u")
-    .replace(/[ìíîï]/, "i")
-    .replace(/[ç]/, "c")
-    .includes(valueInput, regex);
 
-  return result;
-}
-*/
 function searchMatchRecipe(recipe, valueInput) {
   let { name, ingredients, description, appliance, ustensils } = recipe;
   let regex = new RegExp(valueInput, "i");
@@ -172,6 +152,13 @@ btnIngredient.addEventListener("click", () => {
     "Rechercher un ingrédient";
 });
 
+function showIngredients() {
+  let ingredients = recipesJson.map((elt) => elt.ingredients);
+
+  let deleteDuplicates = Array.from(new Set(ingredients));
+  console.log(deleteDuplicates);
+}
+
 // ===========================  Button Appareil  ======================
 
 const btnAppareil = document.querySelector(".btn-appareil");
@@ -187,6 +174,13 @@ btnAppareil.addEventListener("click", () => {
     "Rechercher un appareil";
 });
 
+function showAppliance() {
+  let appliances = recipesJson.map((elt) => elt.appliance).flat();
+
+  let deleteDuplicates = Array.from(new Set(appliances));
+  console.log(deleteDuplicates);
+}
+
 // ===========================  Button ustensiles ======================
 
 const btnUstensile = document.querySelector(".btn-ustensiles");
@@ -201,4 +195,12 @@ btnUstensile.addEventListener("click", () => {
   document.getElementById("search-ustensiles").placeholder =
     "Rechercher un Ustensiles";
 });
+
+function showUstensils() {
+  let ustensils = recipesJson.map((elt) => elt.ustensils).flat();
+
+  let deleteDuplicates = Array.from(new Set(ustensils));
+  console.log(deleteDuplicates);
+}
+
 fetchRecipes();
