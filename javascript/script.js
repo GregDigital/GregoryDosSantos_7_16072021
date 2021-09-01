@@ -226,8 +226,6 @@ function getUstensils() {
   containerUl.innerHTML = html;
 }
 
-function displayIngredients() {}
-
 fetchRecipes();
 
 /*
