@@ -156,7 +156,7 @@ function showIngredients() {
   let ingredients = recipesJson.map((elt) => elt.ingredients);
 
   let deleteDuplicates = Array.from(new Set(ingredients));
-  console.log(deleteDuplicates);
+  // console.log(deleteDuplicates);
 }
 
 // ===========================  Button Appareil  ======================
@@ -178,7 +178,7 @@ function showAppliance() {
   let appliances = recipesJson.map((elt) => elt.appliance).flat();
 
   let deleteDuplicates = Array.from(new Set(appliances));
-  console.log(deleteDuplicates);
+  //console.log(deleteDuplicates);
 }
 
 // ===========================  Button ustensiles ======================
@@ -197,7 +197,7 @@ btnUstensile.addEventListener("click", () => {
 });
 
 function showUstensils() {
-  let ustensils = recipesJson.map((elt) => elt.ustensils).flat();
+  let ustensils = recipesJson.map((recipe) => recipe.ustensils).flat();
 
   let deleteDuplicates = Array.from(new Set(ustensils));
   console.log(deleteDuplicates);
