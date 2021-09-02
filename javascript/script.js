@@ -77,6 +77,7 @@ function sortRecipes() {
             matched_recipes.push(recipe);
           }
         });
+
         displayRecipes(matched_recipes);
       }
     } else if (valueInput.length < 3) {
@@ -251,10 +252,10 @@ function sortUstensils(USTENSILS) {
           );
 
           if (matched == true) {
-            activeUstensils.push(ustensil);
+            matchedd.push(ustensil);
           }
         });
-        console.log(activeUstensils);
+        console.log(matchedd); // Occurence OK
       }
     }
   });
@@ -266,7 +267,7 @@ function searchMatchUstensils(ustensil, valueInputUstensils) {
   let test = ustensil;
 
   let regex = new RegExp(valueInputUstensils, "i");
-  console.log(regex);
+
   if (regex.test(test)) return true;
 
   return false;
