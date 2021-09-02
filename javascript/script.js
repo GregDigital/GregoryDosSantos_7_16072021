@@ -7,6 +7,7 @@ let USTENSILS = [];
 let APPLIANCE = [];
 
 let activeIngredients = [];
+let activeUstensils = [];
 
 // ================= Fetch ==============================================
 async function fetchRecipes() {
@@ -15,11 +16,12 @@ async function fetchRecipes() {
     .then((data) => {
       recipesJson = data.recipes;
       displayRecipes(recipesJson);
-      sortRecipes();
 
+      sortUstensils(USTENSILS);
       INGREDIENTS = getIngredients();
       USTENSILS = getUstensils();
       APPLIANCE = getAppliance();
+      sortRecipes();
 
       /*
       TODO : 
@@ -60,11 +62,9 @@ function sortRecipes() {
 
     if (valueInput.length >= 3) {
       let inputs = valueInput.split(" ");
-
+      console.log(inputs);
       let matched_recipes = [];
       if (valueInput) {
-        console.log(valueInput);
-
         recipesJson.forEach((recipe) => {
           //
 
@@ -211,24 +211,72 @@ btnUstensile.addEventListener("click", () => {
 });
 
 function getUstensils() {
-  let containerUl = document.querySelector(".ustensile");
   let ustensils = recipesJson.map((recipe) => recipe.ustensils).flat();
   let arrayUstensils = Array.from(new Set(ustensils));
 
-  for (let i = 0; i < arrayUstensils.length; i++) {
-    let elt = arrayUstensils[i];
+  displayUstensils(arrayUstensils);
+}
+
+function displayUstensils(ustensils) {
+  let containerUstensils = [];
+  let containerUl = document.querySelector(".ustensile");
+  for (let i = 0; i < ustensils.length; i++) {
+    let elt = ustensils[i];
+    let ustensil = elt[0].toUpperCase() + elt.slice(1);
 
     USTENSILS.push(`
-    <li><a href="#" id="">${elt}</a></li>
+    <li><a href="#" id="">${ustensil}</a></li>
     `);
   }
   let html = USTENSILS.reduce((a, l) => a + l);
   containerUl.innerHTML = html;
 }
 
+function sortUstensils(USTENSILS) {
+  const inputSearchUstensils = document.querySelector("#search-ustensiles");
+
+  inputSearchUstensils.addEventListener("input", (e) => {
+    let valueInputUstensils = e.target.value;
+
+    if (valueInputUstensils.length >= 3) {
+      let inputsUstensils = valueInputUstensils.split(" ");
+      let matchedd = [];
+      if (valueInputUstensils) {
+        USTENSILS.forEach((ustensil) => {
+          //
+
+          console.log(ustensil);
+          let matched = inputsUstensils.every((input) =>
+            searchMatchUstensils(ustensil, input)
+          );
+
+          if (matched == true) {
+            activeUstensils.push(ustensil);
+          }
+        });
+        console.log(activeUstensils);
+      }
+    }
+  });
+}
+
+//activeUstensils []
+
+function searchMatchUstensils(ustensil, valueInputUstensils) {
+  let test = ustensil;
+
+  let regex = new RegExp(valueInputUstensils, "i");
+  console.log(regex);
+  if (regex.test(test)) return true;
+
+  return false;
+}
+
+function displayActiveUstensils() {}
+
 fetchRecipes();
 
 /*
- function displayIngredients() { }
- function displayActiveIngredients() {} 
+
+
 */
