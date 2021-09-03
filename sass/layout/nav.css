@@ -62,7 +62,6 @@ nav form.search-bar button {
   display: flex;
   margin-left: 8%;
   margin-right: 8%;
-  margin-top: 50px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
@@ -387,5 +386,30 @@ nav form.search-bar button {
 .content-ustensiles .ustensile a {
   text-decoration: none;
   color: white;
+}
+
+.btn-ustensils-matched {
+  background: #ed6454;
+  border-radius: 5px;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin-right: 5px;
+}
+
+.btn-ustensils-matched .fa-times-circle {
+  padding-left: 10px;
+}
+
+.add-matchedButton {
+  margin-top: 25px;
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-bottom: 15px;
 }
 /*# sourceMappingURL=nav.css.map */

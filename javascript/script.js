@@ -226,7 +226,7 @@ function displayUstensils(ustensils) {
     let ustensil = elt[0].toUpperCase() + elt.slice(1);
 
     USTENSILS.push(`
-    <li><a href="#" id="">${ustensil}</a></li>
+    <li class="value"><a href="#" >${ustensil}</a></li>
     `);
   }
   let html = USTENSILS.reduce((a, l) => a + l);
@@ -241,21 +241,21 @@ function sortUstensils(USTENSILS) {
 
     if (valueInputUstensils.length >= 3) {
       let inputsUstensils = valueInputUstensils.split(" ");
-      let matchedd = [];
+      let matchedUstensils = [];
       if (valueInputUstensils) {
         USTENSILS.forEach((ustensil) => {
           //
 
-          console.log(ustensil);
+          //console.log(ustensil);
           let matched = inputsUstensils.every((input) =>
             searchMatchUstensils(ustensil, input)
           );
 
           if (matched == true) {
-            matchedd.push(ustensil);
+            matchedUstensils.push(ustensil);
           }
         });
-        console.log(matchedd); // Occurence OK
+        displayActiveUstensils(matchedUstensils);
       }
     }
   });
@@ -273,7 +273,33 @@ function searchMatchUstensils(ustensil, valueInputUstensils) {
   return false;
 }
 
-function displayActiveUstensils() {}
+function displayActiveUstensils(matchedUstensils, ustensils, recipes) {
+  if (matchedUstensils.length > 0) {
+    document.querySelector(".ustensile").innerHTML = matchedUstensils;
+    let value = document.querySelectorAll(".value");
+    for (let i = 0; i < value.length; i++) {
+      const e = value[i];
+      e.addEventListener("click", (e) => {
+        let valueText = e.target.innerText;
+        let divMatchedButton = document.querySelector(".add-matchedButton");
+        let btn = document.createElement("button");
+        btn.classList.add("btn-ustensils-matched");
+        let addText = document.createTextNode(valueText); // Créer un noeud textuel
+        btn.appendChild(addText); // Ajouter le texte au bouton
+        let test = document.createElement("i");
+        test.classList.add("far", "fa-times-circle");
+        btn.insertAdjacentElement("beforeend", test);
+        divMatchedButton.appendChild(btn);
+      });
+    }
+
+    sousMenuUstensile.style.display = "block";
+  } else if (matchedUstensils.length == 0) {
+    sousMenuUstensile.style.display = "none";
+  }
+}
+
+function CreateButton() {}
 
 fetchRecipes();
 

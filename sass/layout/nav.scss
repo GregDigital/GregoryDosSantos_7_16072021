@@ -51,7 +51,6 @@ nav {
   display: flex;
   margin-left: 8%;
   margin-right: 8%;
-  margin-top: 50px;
   flex-wrap: wrap;
 }
 
@@ -274,4 +273,28 @@ nav {
       color: white;
     }
   }
+}
+
+.btn-ustensils-matched {
+  background: #ed6454;
+  border-radius: 5px;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin-right: 5px;
+  .fa-times-circle {
+    padding-left: 10px;
+  }
+}
+
+.add-matchedButton {
+  margin-top: 25px;
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-bottom: 15px;
 }
