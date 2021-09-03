@@ -255,7 +255,7 @@ function sortUstensils(USTENSILS) {
             matchedd.push(ustensil);
           }
         });
-        console.log(matchedd); // Occurence OK
+        console.log(matchedd); // Occurrence OK
       }
     }
   });
