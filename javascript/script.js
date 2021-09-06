@@ -17,17 +17,20 @@ async function fetchRecipes() {
       recipesJson = data.recipes;
       displayRecipes(recipesJson);
 
-      sortUstensils(USTENSILS);
       INGREDIENTS = getIngredients();
       USTENSILS = getUstensils();
+      console.log(USTENSILS);
       APPLIANCE = getAppliance();
-      sortRecipes();
 
       /*
       TODO : 
       Afficher les ingredients et ajouter un events au click
 
       */
+    })
+    .then(() => {
+      sortRecipes();
+      sortUstensils(USTENSILS);
     });
 }
 function displayRecipes(recipes) {
@@ -216,24 +219,28 @@ function getUstensils() {
   let arrayUstensils = Array.from(new Set(ustensils));
 
   displayUstensils(arrayUstensils);
+  return arrayUstensils;
 }
 
 function displayUstensils(ustensils) {
-  let containerUstensils = [];
+  let containerHtml = [];
   let containerUl = document.querySelector(".ustensile");
   for (let i = 0; i < ustensils.length; i++) {
     let elt = ustensils[i];
+
     let ustensil = elt[0].toUpperCase() + elt.slice(1);
 
-    USTENSILS.push(`
-    <li class="value"><a href="#" >${ustensil}</a></li>
+    containerHtml.push(`
+    <li class="value"><a href="#">${ustensil}</a></li>
     `);
   }
-  let html = USTENSILS.reduce((a, l) => a + l);
+
+  let html = containerHtml.reduce((a, l) => a + l);
+  console.log(html);
   containerUl.innerHTML = html;
 }
 
-function sortUstensils(USTENSILS) {
+function sortUstensils(ustensils) {
   const inputSearchUstensils = document.querySelector("#search-ustensiles");
 
   inputSearchUstensils.addEventListener("input", (e) => {
@@ -243,7 +250,7 @@ function sortUstensils(USTENSILS) {
       let inputsUstensils = valueInputUstensils.split(" ");
       let matchedUstensils = [];
       if (valueInputUstensils) {
-        USTENSILS.forEach((ustensil) => {
+        ustensils.forEach((ustensil, index) => {
           //
 
           //console.log(ustensil);
@@ -252,10 +259,13 @@ function sortUstensils(USTENSILS) {
           );
 
           if (matched == true) {
-            matchedUstensils.push(ustensil);
+            ustensils.splice(index, 1);
+            activeUstensils.push(ustensil);
           }
         });
-        displayActiveUstensils(matchedUstensils);
+        console.log(activeUstensils);
+        displayUstensils(ustensils);
+        displayActiveUstensils(activeUstensils);
       }
     }
   });
@@ -273,12 +283,15 @@ function searchMatchUstensils(ustensil, valueInputUstensils) {
   return false;
 }
 
-function displayActiveUstensils(matchedUstensils, ustensils, recipes) {
+function displayActiveUstensils(matchedUstensils) {
   if (matchedUstensils.length > 0) {
     document.querySelector(".ustensile").innerHTML = matchedUstensils;
+    console.log(matchedUstensils);
     let value = document.querySelectorAll(".value");
+    //console.log(value);
     for (let i = 0; i < value.length; i++) {
-      const e = value[i];
+      // const e = value[i];
+
       e.addEventListener("click", (e) => {
         let valueText = e.target.innerText;
         let divMatchedButton = document.querySelector(".add-matchedButton");
@@ -292,14 +305,12 @@ function displayActiveUstensils(matchedUstensils, ustensils, recipes) {
         divMatchedButton.appendChild(btn);
       });
     }
-
+    // Dans la zone active j'efface pour afficher les élements en entrée
     sousMenuUstensile.style.display = "block";
   } else if (matchedUstensils.length == 0) {
     sousMenuUstensile.style.display = "none";
   }
 }
-
-function CreateButton() {}
 
 fetchRecipes();
 
