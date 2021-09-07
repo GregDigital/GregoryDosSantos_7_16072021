@@ -4,6 +4,7 @@ let recipesJson; //
 
 let INGREDIENTS = [];
 let USTENSILS = [];
+
 let APPLIANCE = [];
 
 let activeIngredients = [];
@@ -19,7 +20,7 @@ async function fetchRecipes() {
 
       INGREDIENTS = getIngredients();
       USTENSILS = getUstensils();
-      console.log(USTENSILS);
+
       APPLIANCE = getAppliance();
 
       /*
@@ -33,6 +34,8 @@ async function fetchRecipes() {
       sortUstensils(USTENSILS);
     });
 }
+//console.log(USTENSILS);
+
 function displayRecipes(recipes) {
   if (recipes.length > 0) {
     document.querySelector("#recipes-no-found").style.display = "none";
@@ -65,13 +68,12 @@ function sortRecipes() {
 
     if (valueInput.length >= 3) {
       let inputs = valueInput.split(" ");
-      console.log(inputs);
+
       let matched_recipes = [];
       if (valueInput) {
         recipesJson.forEach((recipe) => {
           //
 
-          console.log(recipe);
           let matched = inputs.every((input) =>
             searchMatchRecipe(recipe, input)
           );
@@ -112,7 +114,6 @@ function searchMatchRecipe(recipe, valueInput) {
 function generateIngredients(ingredients) {
   let acc = [];
   for (let ingredient of ingredients) {
-    // console.log(ingredient.ingredient);
     acc.push(
       ` <li>${ingredient.ingredient} : <span>${ingredient.quantity}</span></li>`
     );
@@ -173,7 +174,7 @@ function getIngredients() {
   let ingredients = recipesJson.map((elt) => elt.ingredients);
 
   let deleteDuplicates = Array.from(new Set(ingredients));
-  // console.log(deleteDuplicates);
+
   return deleteDuplicates;
 }
 
@@ -196,10 +197,9 @@ function getAppliance() {
   let appliances = recipesJson.map((elt) => elt.appliance).flat();
 
   let arrayAppliances = Array.from(new Set(appliances));
-  console.log(arrayAppliances);
 }
 
-// ===========================  Button ustensiles ======================
+// ===========================  Button ustensiles ================================================
 
 const btnUstensile = document.querySelector(".btn-ustensiles");
 const inputUstensile = document.querySelector(".search-ustensiles");
@@ -214,30 +214,53 @@ btnUstensile.addEventListener("click", () => {
     "Rechercher un Ustensiles";
 });
 
-function getUstensils() {
-  let ustensils = recipesJson.map((recipe) => recipe.ustensils).flat();
-  let arrayUstensils = Array.from(new Set(ustensils));
+// ============================ Map Ustensils =============================
 
+function getUstensils() {
+  let ustensilsJson = recipesJson.map((recipe) => recipe.ustensils); // recette avec les ustensiles
+  let ustensils = recipesJson.map((recipe) => recipe.ustensils).flat();
+  let arrayUstensils = Array.from(new Set(ustensils)); // tri des ustensiles et des doublons
+  USTENSILS.push(arrayUstensils); // USTENSILS = variable globale accessible
+  //console.log(arrayUstensils);
   displayUstensils(arrayUstensils);
   return arrayUstensils;
 }
 
+//============================ Affichage des ustensiles ====================================
+
 function displayUstensils(ustensils) {
   let containerHtml = [];
   let containerUl = document.querySelector(".ustensile");
-  for (let i = 0; i < ustensils.length; i++) {
-    let elt = ustensils[i];
-
-    let ustensil = elt[0].toUpperCase() + elt.slice(1);
-
-    containerHtml.push(`
-    <li class="value"><a href="#">${ustensil}</a></li>
-    `);
+  for (let ustensil of ustensils) {
+    containerHtml.push(templateUstensils(ustensil));
   }
 
   let html = containerHtml.reduce((a, l) => a + l);
-  console.log(html);
   containerUl.innerHTML = html;
+}
+
+// ================================ Template ustensiles ===================================
+
+function templateUstensils(ustensil) {
+  return `
+<li class="value"><a href="#">${ustensil}</a></li>
+`;
+}
+
+// ========= Fonction trier les ustensiles =======================================
+
+function tagShowButton(e) {
+  console.log(e.target);
+  let valueText = e.target.innerText;
+  let divMatchedButton = document.querySelector(".add-matchedButton");
+  let btn = document.createElement("button");
+  btn.classList.add("btn-ustensils-matched");
+  let addText = document.createTextNode(valueText); // Créer un noeud textuel
+  btn.appendChild(addText); // Ajouter le texte au bouton
+  let test = document.createElement("i");
+  test.classList.add("far", "fa-times-circle");
+  btn.insertAdjacentElement("beforeend", test);
+  divMatchedButton.appendChild(btn);
 }
 
 function sortUstensils(ustensils) {
@@ -248,30 +271,62 @@ function sortUstensils(ustensils) {
 
     if (valueInputUstensils.length >= 3) {
       let inputsUstensils = valueInputUstensils.split(" ");
-      let matchedUstensils = [];
       if (valueInputUstensils) {
         ustensils.forEach((ustensil, index) => {
           //
 
-          //console.log(ustensil);
           let matched = inputsUstensils.every((input) =>
             searchMatchUstensils(ustensil, input)
           );
 
           if (matched == true) {
+            console.log(ustensils);
             ustensils.splice(index, 1);
             activeUstensils.push(ustensil);
+            console.log(activeUstensils);
+            console.log(ustensils);
+            sousMenuUstensile.style.display = "block";
           }
         });
-        console.log(activeUstensils);
-        displayUstensils(ustensils);
-        displayActiveUstensils(activeUstensils);
+
+        displayUstensils(activeUstensils);
+        //return activeUstensils;
       }
+    } else if (valueInputUstensils == 0) {
+      activeUstensils.forEach((removeUstensil) => {
+        ustensils.push(removeUstensil);
+      });
+      activeUstensils = [];
+      displayUstensils(ustensils);
+      console.log(ustensils);
+      console.log(activeUstensils);
     }
+  });
+
+  let valueTag = document.querySelectorAll(".value");
+  valueTag.forEach((value) => {
+    value.addEventListener("click", (e) => {
+      tagShowButton(e);
+      activeUstensils.push(value.textContent);
+      value.remove();
+      console.log(activeUstensils);
+    });
+  });
+
+  let removeTag = document.querySelectorAll(".btn-ustensils-matched");
+
+  removeTag.forEach((removeValue) => {
+    console.log(removeTag);
+    removeValue.addEventListener("click", (e) => {
+      removeTag.push(activeUstensils);
+      console.log(activeUstensils);
+    });
   });
 }
 
-//activeUstensils []
+// ===============================
+
+// ========= Fonction Search Match Ustensils  =======================================
 
 function searchMatchUstensils(ustensil, valueInputUstensils) {
   let test = ustensil;
@@ -283,38 +338,26 @@ function searchMatchUstensils(ustensil, valueInputUstensils) {
   return false;
 }
 
-function displayActiveUstensils(matchedUstensils) {
-  if (matchedUstensils.length > 0) {
-    document.querySelector(".ustensile").innerHTML = matchedUstensils;
-    console.log(matchedUstensils);
-    let value = document.querySelectorAll(".value");
-    //console.log(value);
-    for (let i = 0; i < value.length; i++) {
-      // const e = value[i];
-
-      e.addEventListener("click", (e) => {
-        let valueText = e.target.innerText;
-        let divMatchedButton = document.querySelector(".add-matchedButton");
-        let btn = document.createElement("button");
-        btn.classList.add("btn-ustensils-matched");
-        let addText = document.createTextNode(valueText); // Créer un noeud textuel
-        btn.appendChild(addText); // Ajouter le texte au bouton
-        let test = document.createElement("i");
-        test.classList.add("far", "fa-times-circle");
-        btn.insertAdjacentElement("beforeend", test);
-        divMatchedButton.appendChild(btn);
-      });
-    }
-    // Dans la zone active j'efface pour afficher les élements en entrée
-    sousMenuUstensile.style.display = "block";
-  } else if (matchedUstensils.length == 0) {
-    sousMenuUstensile.style.display = "none";
-  }
-}
+// ======================== On affiche les ustensiles qui match avec la saisie utilisateur ======
 
 fetchRecipes();
 
 /*
+function displayActiveUstensils() {
+  let containerHtml = [];
+  if (matchedUstensils.length > 0) {
+    let containerUl = document.querySelector(".ustensile");
+    matchedUstensils.forEach((matchedUstensil) => {
+      containerHtml.push(`
+      <li class="value"><a href="#">${matchedUstensil}</a></li>
+      `);
+    });
 
-
+    let html = containerHtml.reduce((a, l) => a + l);
+    containerUl.innerHTML = html;
+    console.log(containerHtml);
+    // Dans la zone active j'efface pour afficher les élements en entrée
+    sousMenuUstensile.style.display = "block";
+  }
+}
 */
