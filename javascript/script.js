@@ -32,6 +32,7 @@ async function fetchRecipes() {
     .then(() => {
       sortRecipes();
       sortUstensils(USTENSILS);
+      remove(USTENSILS);
     });
 }
 //console.log(USTENSILS);
@@ -255,12 +256,14 @@ function tagShowButton(e) {
   let divMatchedButton = document.querySelector(".add-matchedButton");
   let btn = document.createElement("button");
   btn.classList.add("btn-ustensils-matched");
+
   let addText = document.createTextNode(valueText); // Créer un noeud textuel
   btn.appendChild(addText); // Ajouter le texte au bouton
   let test = document.createElement("i");
   test.classList.add("far", "fa-times-circle");
   btn.insertAdjacentElement("beforeend", test);
   divMatchedButton.appendChild(btn);
+  remove();
 }
 
 function sortUstensils(ustensils) {
@@ -297,6 +300,7 @@ function sortUstensils(ustensils) {
         ustensils.push(removeUstensil);
       });
       activeUstensils = [];
+      sousMenuUstensile.style.display = "none";
       displayUstensils(ustensils);
       console.log(ustensils);
       console.log(activeUstensils);
@@ -304,7 +308,7 @@ function sortUstensils(ustensils) {
   });
 
   let valueTag = document.querySelectorAll(".value");
-  valueTag.forEach((value) => {
+  valueTag.forEach((value, index) => {
     value.addEventListener("click", (e) => {
       tagShowButton(e);
       activeUstensils.push(value.textContent);
@@ -312,14 +316,27 @@ function sortUstensils(ustensils) {
       console.log(activeUstensils);
     });
   });
+}
 
-  let removeTag = document.querySelectorAll(".btn-ustensils-matched");
+function remove(ustensils) {
+  let tags = document.querySelectorAll(".btn-ustensils-matched");
 
-  removeTag.forEach((removeValue) => {
-    console.log(removeTag);
-    removeValue.addEventListener("click", (e) => {
-      removeTag.push(activeUstensils);
-      console.log(activeUstensils);
+  tags.forEach((tag) => {
+    tag.addEventListener("click", (e) => {
+      let tagValue = tag.textContent;
+
+      activeUstensils.forEach((valueArrayUstensils, index) => {
+        if (tagValue == valueArrayUstensils || tagValue == tag) {
+          //ustensils.push(tagValue);
+
+          activeUstensils.pop(valueArrayUstensils);
+          tag.style.display = "none";
+          console.log(activeUstensils);
+          console.log(true);
+        } else {
+          console.log(false);
+        }
+      });
     });
   });
 }
