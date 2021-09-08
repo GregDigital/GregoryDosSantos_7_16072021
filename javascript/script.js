@@ -9,6 +9,7 @@ let APPLIANCE = [];
 
 let activeIngredients = [];
 let activeUstensils = [];
+let tagActive = [];
 
 // ================= Fetch ==============================================
 async function fetchRecipes() {
@@ -290,9 +291,22 @@ function sortUstensils(ustensils) {
             console.log(ustensils);
             sousMenuUstensile.style.display = "block";
           }
+          let valueTag = document.querySelectorAll(".value");
+          valueTag.forEach((value) => {
+            value.addEventListener("click", (e) => {
+              tagShowButton(e);
+              activeUstensils.forEach((element) => {
+                console.log(element);
+                console.log(tagActive);
+              });
+              value.remove();
+              console.log(activeUstensils);
+            });
+          });
         });
 
         displayUstensils(activeUstensils);
+
         //return activeUstensils;
       }
     } else if (valueInputUstensils == 0) {
@@ -305,16 +319,6 @@ function sortUstensils(ustensils) {
       console.log(ustensils);
       console.log(activeUstensils);
     }
-  });
-
-  let valueTag = document.querySelectorAll(".value");
-  valueTag.forEach((value, index) => {
-    value.addEventListener("click", (e) => {
-      tagShowButton(e);
-      activeUstensils.push(value.textContent);
-      value.remove();
-      console.log(activeUstensils);
-    });
   });
 }
 
