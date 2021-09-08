@@ -291,18 +291,6 @@ function sortUstensils(ustensils) {
             console.log(ustensils);
             sousMenuUstensile.style.display = "block";
           }
-          let valueTag = document.querySelectorAll(".value");
-          valueTag.forEach((value) => {
-            value.addEventListener("click", (e) => {
-              tagShowButton(e);
-              activeUstensils.forEach((element) => {
-                console.log(element);
-                console.log(tagActive);
-              });
-              value.remove();
-              console.log(activeUstensils);
-            });
-          });
         });
 
         displayUstensils(activeUstensils);
@@ -320,9 +308,18 @@ function sortUstensils(ustensils) {
       console.log(activeUstensils);
     }
   });
+  let valueTag = document.querySelectorAll(".value");
+  valueTag.forEach((value) => {
+    value.addEventListener("click", (e) => {
+      tagShowButton(e);
+      tagActive.push(value.textContent);
+      value.remove();
+      console.log(tagActive);
+    });
+  });
 }
 
-function remove(ustensils) {
+function remove() {
   let tags = document.querySelectorAll(".btn-ustensils-matched");
 
   tags.forEach((tag) => {
@@ -344,8 +341,6 @@ function remove(ustensils) {
     });
   });
 }
-
-// ===============================
 
 // ========= Fonction Search Match Ustensils  =======================================
 
