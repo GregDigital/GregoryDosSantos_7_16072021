@@ -8,7 +8,8 @@ let USTENSILS = [];
 let APPLIANCE = [];
 
 let activeIngredients = [];
-let activeUstensils = [];
+let matchedUstensils = []; // recherche dans la barre de recherche ustensiles si true
+let activeUstensils = []; // tableau vide ou les ustensiles selectionnés par l'utilisateur se mettront
 let tagActive = [];
 
 // ================= Fetch ==============================================
@@ -33,11 +34,11 @@ async function fetchRecipes() {
     .then(() => {
       sortRecipesGlobalSearch(recipesJson);
       sortUstensils(USTENSILS);
-      remove(USTENSILS);
+      //remove(USTENSILS);
     });
 }
 //console.log(USTENSILS);
-
+/*
 function updateRecipes(recipes) {
   let rlt = sortRecipesGlobalSearch(recipes);
   rlt = sortUstensils(rlt);
@@ -58,7 +59,7 @@ function sortRecipesByIngredients(recipes) {
   });
   return rlt;
 }
-
+*/
 function displayRecipes(recipes) {
   if (recipes.length > 0) {
     document.querySelector("#recipes-no-found").style.display = "none";
@@ -240,7 +241,7 @@ btnUstensile.addEventListener("click", () => {
 // ============================ Map Ustensils =============================
 
 function getUstensils() {
-  let ustensilsJson = recipesJson.map((recipe) => recipe.ustensils); // recette avec les ustensiles
+  // let ustensilsJson = recipesJson.map((recipe) => recipe.ustensils); // recette avec les ustensiles
   let ustensils = recipesJson.map((recipe) => recipe.ustensils).flat();
   let arrayUstensils = Array.from(new Set(ustensils)); // tri des ustensiles et des doublons
   USTENSILS.push(arrayUstensils); // USTENSILS = variable globale accessible
@@ -258,7 +259,7 @@ function displayUstensils(ustensils) {
     containerHtml.push(templateUstensils(ustensil));
   }
 
-  let html = containerHtml.reduce((a, l) => a + l);
+  let html = containerHtml.reduce((a, l) => a + l, " ");
   containerUl.innerHTML = html;
 }
 
@@ -285,7 +286,6 @@ function tagShowButton(e) {
   test.classList.add("far", "fa-times-circle");
   btn.insertAdjacentElement("beforeend", test);
   divMatchedButton.appendChild(btn);
-  remove();
 }
 
 function sortUstensils(ustensils) {
@@ -307,60 +307,27 @@ function sortUstensils(ustensils) {
           if (matched == true) {
             console.log(ustensils);
             ustensils.splice(index, 1);
-            activeUstensils.push(ustensil);
-            console.log(activeUstensils);
+            matchedUstensils.push(ustensil);
+            console.log(matchedUstensils);
             console.log(ustensils);
             sousMenuUstensile.style.display = "block";
           }
         });
 
-        displayUstensils(activeUstensils);
+        displayUstensils(matchedUstensils);
 
-        //return activeUstensils;
+        return matchedUstensils;
       }
     } else if (valueInputUstensils == 0) {
-      activeUstensils.forEach((removeUstensil) => {
+      matchedUstensils.forEach((removeUstensil) => {
         ustensils.push(removeUstensil);
       });
-      activeUstensils = [];
+      matchedUstensils = [];
       sousMenuUstensile.style.display = "none";
       displayUstensils(ustensils);
       console.log(ustensils);
       console.log(activeUstensils);
     }
-  });
-  let valueTag = document.querySelectorAll(".value");
-  valueTag.forEach((value) => {
-    value.addEventListener("click", (e) => {
-      tagActive.push(value.textContent);
-      value.remove();
-      tagShowButton(e);
-      //up recipe
-      console.log(tagActive);
-    });
-  });
-}
-
-function remove() {
-  let tags = document.querySelectorAll(".btn-ustensils-matched");
-
-  tags.forEach((tag) => {
-    tag.addEventListener("click", (e) => {
-      let tagValue = tag.textContent;
-
-      activeUstensils.forEach((valueArrayUstensils, index) => {
-        if (tagValue == valueArrayUstensils || tagValue == tag) {
-          //ustensils.push(tagValue);
-
-          activeUstensils.pop(valueArrayUstensils);
-          tag.style.display = "none";
-          console.log(activeUstensils);
-          console.log(true);
-        } else {
-          console.log(false);
-        }
-      });
-    });
   });
 }
 
@@ -397,5 +364,44 @@ function displayActiveUstensils() {
     // Dans la zone active j'efface pour afficher les élements en entrée
     sousMenuUstensile.style.display = "block";
   }
+}
+
+
+
+
+
+
+let valueTag = document.querySelectorAll(".value");
+valueTag.forEach((value) => {
+  value.addEventListener("click", (e) => {
+    tagActive.push(value.textContent);
+    value.remove();
+    tagShowButton(e);
+    //up recipe
+    console.log(tagActive);
+  });
+});
+
+function remove() {
+  let tags = document.querySelectorAll(".btn-ustensils-matched");
+
+  tags.forEach((tag) => {
+    tag.addEventListener("click", (e) => {
+      let tagValue = tag.textContent;
+
+      activeUstensils.forEach((valueArrayUstensils, index) => {
+        if (tagValue == valueArrayUstensils || tagValue == tag) {
+          //ustensils.push(tagValue);
+
+          activeUstensils.pop(valueArrayUstensils);
+          tag.style.display = "none";
+          console.log(activeUstensils);
+          console.log(true);
+        } else {
+          console.log(false);
+        }
+      });
+    });
+  });
 }
 */
