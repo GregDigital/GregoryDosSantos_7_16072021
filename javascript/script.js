@@ -31,12 +31,33 @@ async function fetchRecipes() {
       */
     })
     .then(() => {
-      sortRecipes();
+      sortRecipesGlobalSearch(recipesJson);
       sortUstensils(USTENSILS);
       remove(USTENSILS);
     });
 }
 //console.log(USTENSILS);
+
+function updateRecipes(recipes) {
+  let rlt = sortRecipesGlobalSearch(recipes);
+  rlt = sortUstensils(rlt);
+  rlt = sortRecipesByIngredients(rlt);
+  rlt = sortRecipesByAppliances(rlt);
+  displayRecipes(rlt);
+}
+
+function sortRecipesByIngredients(recipes) {
+  if (activeIngredients == []) return recipes;
+
+  let rlt = recipes.filter((recipe) => {
+    // ma recette contient tous les ingrédients sélectionnés par l'utilisateur
+    // return true si c'est vrai sinon return false
+    ustensilActive.every((ustensil) => {
+      recipe.ustensils.include(ustensil);
+    });
+  });
+  return rlt;
+}
 
 function displayRecipes(recipes) {
   if (recipes.length > 0) {
@@ -62,7 +83,7 @@ function displayRecipes(recipes) {
 
 // ===================== Input principal de recherche ===================
 
-function sortRecipes() {
+function sortRecipesGlobalSearch(recipes) {
   const inputSearch = document.querySelector('input[type="search"]');
   let notFound = document.querySelector("#recipes-no-found");
   inputSearch.addEventListener("input", (e) => {
@@ -73,7 +94,7 @@ function sortRecipes() {
 
       let matched_recipes = [];
       if (valueInput) {
-        recipesJson.forEach((recipe) => {
+        recipes.forEach((recipe) => {
           //
 
           let matched = inputs.every((input) =>
@@ -88,7 +109,7 @@ function sortRecipes() {
         displayRecipes(matched_recipes);
       }
     } else if (valueInput.length < 3) {
-      displayRecipes(recipesJson);
+      displayRecipes(recipes);
     }
   });
 }
@@ -311,9 +332,10 @@ function sortUstensils(ustensils) {
   let valueTag = document.querySelectorAll(".value");
   valueTag.forEach((value) => {
     value.addEventListener("click", (e) => {
-      tagShowButton(e);
       tagActive.push(value.textContent);
       value.remove();
+      tagShowButton(e);
+      //up recipe
       console.log(tagActive);
     });
   });
