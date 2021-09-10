@@ -10,7 +10,6 @@ let APPLIANCE = [];
 let activeIngredients = [];
 let matchedUstensils = []; // recherche dans la barre de recherche ustensiles si true
 let activeUstensils = []; // tableau vide ou les ustensiles selectionnés par l'utilisateur se mettront
-let tagActive = [];
 
 // ================= Fetch ==============================================
 async function fetchRecipes() {
@@ -34,6 +33,8 @@ async function fetchRecipes() {
     .then(() => {
       sortRecipesGlobalSearch(recipesJson);
       sortUstensils(USTENSILS);
+      // showTag(USTENSILS);
+
       //remove(USTENSILS);
     });
 }
@@ -273,21 +274,6 @@ function templateUstensils(ustensil) {
 
 // ========= Fonction trier les ustensiles =======================================
 
-function tagShowButton(e) {
-  console.log(e.target);
-  let valueText = e.target.innerText;
-  let divMatchedButton = document.querySelector(".add-matchedButton");
-  let btn = document.createElement("button");
-  btn.classList.add("btn-ustensils-matched");
-
-  let addText = document.createTextNode(valueText); // Créer un noeud textuel
-  btn.appendChild(addText); // Ajouter le texte au bouton
-  let test = document.createElement("i");
-  test.classList.add("far", "fa-times-circle");
-  btn.insertAdjacentElement("beforeend", test);
-  divMatchedButton.appendChild(btn);
-}
-
 function sortUstensils(ustensils) {
   const inputSearchUstensils = document.querySelector("#search-ustensiles");
 
@@ -306,15 +292,21 @@ function sortUstensils(ustensils) {
 
           if (matched == true) {
             console.log(ustensils);
-            ustensils.splice(index, 1);
+            //ustensils.splice(index, 1);
+            console.log(ustensils);
             matchedUstensils.push(ustensil);
             console.log(matchedUstensils);
             console.log(ustensils);
             sousMenuUstensile.style.display = "block";
+            let selectUstensilTrue = document.querySelectorAll(".value");
+            selectUstensilTrue.forEach((elt) => {
+              elt.classList.add("true");
+            });
           }
         });
 
-        displayUstensils(matchedUstensils);
+        //showTag();
+        removeTag();
 
         return matchedUstensils;
       }
@@ -330,9 +322,6 @@ function sortUstensils(ustensils) {
     }
   });
 }
-
-// ========= Fonction Search Match Ustensils  =======================================
-
 function searchMatchUstensils(ustensil, valueInputUstensils) {
   let test = ustensil;
 
@@ -342,31 +331,71 @@ function searchMatchUstensils(ustensil, valueInputUstensils) {
 
   return false;
 }
+/*
+function showTag(value) {
+  let valueTag = document.querySelectorAll(".value");
+  valueTag.forEach((value) => {
+    value.addEventListener("click", (e) => {
+      let ustensilName = value.textContent;
+      activeUstensils.push(ustensilName); // on envoie dans le tableau vide activeUstensils les ustensiles qui ont été cliqués
+      //USTENSILS.pop(ustensilName);
+      value.style.display = "none";
+      //value.remove(); // On supprime dans ustensils
+
+      tagShowButton(e);
+      //up recipe
+      //  console.log(activeUstensils);
+      removeTag(value);
+    });
+  });
+}
+*/
+function removeTag(test) {
+  let btnUstensil = document.querySelectorAll(".btn-ustensils-matched");
+
+  btnUstensil.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      let btnName = btn.textContent;
+
+      for (let i = 0; i < activeUstensils.length; i++) {
+        let elt = activeUstensils[i];
+        if (elt == btnName) {
+          console.log("true");
+          activeUstensils.pop(elt);
+          test.style.display = "block";
+          btn.style.display = "none";
+          console.log(activeUstensils);
+        } else {
+          console.log("foulse");
+        }
+      }
+    });
+  });
+  console.log(USTENSILS);
+  console.log("let tableau activeUstensils comporte : " + activeUstensils);
+}
+
+function tagShowButton(e) {
+  console.log(e.target);
+  let valueText = e.target.innerText;
+  let divMatchedButton = document.querySelector(".add-matchedButton");
+  let btn = document.createElement("button");
+  btn.classList.add("btn-ustensils-matched");
+
+  let addText = document.createTextNode(valueText); // Créer un noeud textuel
+  btn.appendChild(addText); // Ajouter le texte au bouton
+  let test = document.createElement("i");
+  test.classList.add("far", "fa-times-circle");
+  btn.insertAdjacentElement("beforeend", test);
+  divMatchedButton.appendChild(btn);
+}
+// ========= Fonction Search Match Ustensils  =======================================
 
 // ======================== On affiche les ustensiles qui match avec la saisie utilisateur ======
-
+console.log(activeUstensils);
 fetchRecipes();
 
 /*
-function displayActiveUstensils() {
-  let containerHtml = [];
-  if (matchedUstensils.length > 0) {
-    let containerUl = document.querySelector(".ustensile");
-    matchedUstensils.forEach((matchedUstensil) => {
-      containerHtml.push(`
-      <li class="value"><a href="#">${matchedUstensil}</a></li>
-      `);
-    });
-
-    let html = containerHtml.reduce((a, l) => a + l);
-    containerUl.innerHTML = html;
-    console.log(containerHtml);
-    // Dans la zone active j'efface pour afficher les élements en entrée
-    sousMenuUstensile.style.display = "block";
-  }
-}
-
-
 
 
 
