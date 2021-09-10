@@ -291,12 +291,8 @@ function sortUstensils(ustensils) {
           );
 
           if (matched == true) {
-            console.log(ustensils);
-            //ustensils.splice(index, 1);
-            console.log(ustensils);
+            ustensils.splice(index, 1);
             matchedUstensils.push(ustensil);
-            console.log(matchedUstensils);
-            console.log(ustensils);
             sousMenuUstensile.style.display = "block";
             let selectUstensilTrue = document.querySelectorAll(".value");
             selectUstensilTrue.forEach((elt) => {
@@ -305,9 +301,9 @@ function sortUstensils(ustensils) {
           }
         });
 
-        //showTag();
+        showTag();
         removeTag();
-
+        displayUstensils(matchedUstensils);
         return matchedUstensils;
       }
     } else if (valueInputUstensils == 0) {
