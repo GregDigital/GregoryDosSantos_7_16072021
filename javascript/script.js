@@ -301,10 +301,10 @@ function sortUstensils(ustensils) {
           }
         });
 
-        showTag();
-        removeTag();
+        // showTag();
+        // removeTag();
         displayUstensils(matchedUstensils);
-        return matchedUstensils;
+        //return matchedUstensils;
       }
     } else if (valueInputUstensils == 0) {
       matchedUstensils.forEach((removeUstensil) => {
@@ -346,7 +346,7 @@ function showTag(value) {
   });
 }
 */
-function removeTag(test) {
+function removeTag() {
   let btnUstensil = document.querySelectorAll(".btn-ustensils-matched");
 
   btnUstensil.forEach((btn) => {
