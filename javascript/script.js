@@ -23,7 +23,7 @@ async function fetchRecipes() {
       USTENSILS = getUstensils();
 
       APPLIANCE = getAppliance();
-
+      displayActiveUstensils(USTENSILS);
       /*
       TODO : 
       Afficher les ingredients et ajouter un events au click
@@ -33,9 +33,7 @@ async function fetchRecipes() {
     .then(() => {
       sortRecipesGlobalSearch(recipesJson);
       sortUstensils(USTENSILS);
-      // showTag(USTENSILS);
-
-      //remove(USTENSILS);
+      showTag(USTENSILS);
     });
 }
 //console.log(USTENSILS);
@@ -189,8 +187,8 @@ const up = document.querySelector("#i");
 btnIngredient.addEventListener("click", () => {
   inputIngredient.style.width = "100%";
   sousMenu.style.display = "block";
-  document.getElementById("i").classList.add("fa-chevron-up");
-  document.getElementById("i").classList.remove("fa-chevron-down");
+  // document.getElementById("i").classList.add("fa-chevron-up");
+  // document.getElementById("i").classList.remove("fa-chevron-down");
   document.querySelector(".search-ingredient").placeholder =
     "Rechercher un ingrédient";
 });
@@ -212,8 +210,8 @@ const sousMenuAppareil = document.querySelector(".sous-menu-appareil");
 btnAppareil.addEventListener("click", () => {
   inputAppareil.style.width = "130%";
   sousMenuAppareil.style.display = "block";
-  document.getElementById("i").classList.add("fa-chevron-up");
-  document.getElementById("i").classList.remove("fa-chevron-down");
+  //document.getElementById("i").classList.add("fa-chevron-up");
+  // document.getElementById("i").classList.remove("fa-chevron-down");
   document.getElementById("search-appareil").placeholder =
     "Rechercher un appareil";
 });
@@ -226,17 +224,30 @@ function getAppliance() {
 
 // ===========================  Button ustensiles ================================================
 
-const btnUstensile = document.querySelector(".btn-ustensiles");
-const inputUstensile = document.querySelector(".search-ustensiles");
-const sousMenuUstensile = document.querySelector(".sous-menu-ustensiles");
+let btnUstensile = document.querySelector(".btn-ustensiles");
+let inputUstensile = document.querySelector(".search-ustensiles");
+let sousMenuUstensile = document.querySelector(".sous-menu-ustensiles");
+let chevronDown = document.querySelector(".none");
+let chevronUp = document.querySelector(".add");
+let closeBtn = document.querySelector(".add");
 
 btnUstensile.addEventListener("click", () => {
   inputUstensile.style.width = "130%";
   sousMenuUstensile.style.display = "block";
-  document.getElementById("i").classList.add("fa-chevron-up");
-  document.getElementById("i").classList.remove("fa-chevron-down");
+  chevronDown.style.display = "none";
+  chevronUp.style.display = "block";
   document.getElementById("search-ustensiles").placeholder =
     "Rechercher un Ustensiles";
+});
+
+let inputUstensil = document.querySelector(".search-ustensiles");
+let sousMenuUstensil = document.querySelector(".sous-menu-ustensiles");
+let chevronDow = document.querySelector(".none");
+let chevronU = document.querySelector(".add");
+let hello = document.querySelector(".noneSS");
+
+closeBtn.addEventListener("click", () => {
+  hello.style.display = "none";
 });
 
 // ============================ Map Ustensils =============================
@@ -291,23 +302,16 @@ function sortUstensils(ustensils) {
           );
 
           if (matched == true) {
-            console.log(ustensils);
-            //ustensils.splice(index, 1);
-            console.log(ustensils);
+            // renvoi true via barre de recherhce
+            ustensils.splice(index, 1);
             matchedUstensils.push(ustensil);
-            console.log(matchedUstensils);
-            console.log(ustensils);
+            console.log("tableau matchedUstensils" + [matchedUstensils]);
             sousMenuUstensile.style.display = "block";
-            let selectUstensilTrue = document.querySelectorAll(".value");
-            selectUstensilTrue.forEach((elt) => {
-              elt.classList.add("true");
-            });
           }
         });
 
-        //showTag();
-        removeTag();
-
+        // removeTag();
+        displayUstensils(matchedUstensils);
         return matchedUstensils;
       }
     } else if (valueInputUstensils == 0) {
@@ -331,48 +335,72 @@ function searchMatchUstensils(ustensil, valueInputUstensils) {
 
   return false;
 }
-/*
-function showTag(value) {
-  let valueTag = document.querySelectorAll(".value");
-  valueTag.forEach((value) => {
-    value.addEventListener("click", (e) => {
-      let ustensilName = value.textContent;
-      activeUstensils.push(ustensilName); // on envoie dans le tableau vide activeUstensils les ustensiles qui ont été cliqués
-      //USTENSILS.pop(ustensilName);
-      value.style.display = "none";
-      //value.remove(); // On supprime dans ustensils
 
+function showTag(value) {
+  console.log(value);
+  let valueTags = document.querySelectorAll(".value");
+
+  valueTags.forEach((valuetag, index) => {
+    valuetag.addEventListener("click", (e) => {
+      let ustensilName = valuetag.textContent;
+      console.log(ustensilName);
+      console.log(value);
+      for (let i = 0; i < value.length; i++) {
+        let elt = value[i];
+        if (ustensilName == elt) {
+          valuetag.style.display = "none";
+          value.pop(elt);
+          value.slice(index, 1);
+          activeUstensils.push(elt);
+          console.log(value);
+          console.log(activeUstensils);
+
+          removeTag(elt);
+        }
+      }
       tagShowButton(e);
-      //up recipe
-      //  console.log(activeUstensils);
-      removeTag(value);
+      displayActiveUstensils(value);
+      return value;
     });
   });
 }
-*/
-function removeTag(test) {
+
+function displayActiveUstensils(ustensils) {
+  let containerHtml = [];
+  let containerUl = document.querySelector(".ustensile");
+  for (let ustensil of ustensils) {
+    containerHtml.push(templateUstensils(ustensil));
+  }
+
+  let html = containerHtml.reduce((a, l) => a + l, " ");
+  containerUl.innerHTML = html;
+}
+
+console.log(activeUstensils);
+
+function removeTag(value) {
+  console.log(value);
   let btnUstensil = document.querySelectorAll(".btn-ustensils-matched");
 
   btnUstensil.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      let btnName = btn.textContent;
-
+      let btnValue = btn.textContent;
+      console.log(btnValue);
+      index = 0;
       for (let i = 0; i < activeUstensils.length; i++) {
-        let elt = activeUstensils[i];
-        if (elt == btnName) {
+        let z = activeUstensils[i];
+        if (value == z) {
           console.log("true");
-          activeUstensils.pop(elt);
-          test.style.display = "block";
+          USTENSILS.push(z);
+          activeUstensils.pop(z);
           btn.style.display = "none";
+          console.log(USTENSILS);
           console.log(activeUstensils);
-        } else {
-          console.log("foulse");
         }
+        break;
       }
     });
   });
-  console.log(USTENSILS);
-  console.log("let tableau activeUstensils comporte : " + activeUstensils);
 }
 
 function tagShowButton(e) {
@@ -389,10 +417,9 @@ function tagShowButton(e) {
   btn.insertAdjacentElement("beforeend", test);
   divMatchedButton.appendChild(btn);
 }
-// ========= Fonction Search Match Ustensils  =======================================
 
 // ======================== On affiche les ustensiles qui match avec la saisie utilisateur ======
-console.log(activeUstensils);
+
 fetchRecipes();
 
 /*

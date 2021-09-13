@@ -490,6 +490,14 @@ nav form.search-bar button {
   border-bottom-right-radius: 5px;
 }
 
+.btn-ustensiles .none {
+  display: block;
+}
+
+.btn-ustensiles .add {
+  display: none;
+}
+
 .sous-menu-ustensiles {
   padding: 25px;
   font-size: 1em;
