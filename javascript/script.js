@@ -29,7 +29,7 @@ async function fetchRecipes() {
       USTENSILS = getUstensils();
 
       APPLIANCE = getAppliance();
-      // displayActiveUstensils(USTENSILS);
+
       /*
       TODO : 
       Afficher les ingredients et ajouter un events au click
