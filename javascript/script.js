@@ -209,16 +209,17 @@ const sousMenuAppareil = document.querySelector(".sous-menu-appareil");
 btnAppareil.addEventListener("click", () => {
   inputAppareil.style.width = "130%";
   sousMenuAppareil.style.display = "block";
-  //document.getElementById("i").classList.add("fa-chevron-up");
-  // document.getElementById("i").classList.remove("fa-chevron-down");
+  document.getElementById("i").classList.add("fa-chevron-up");
+  document.getElementById("i").classList.remove("fa-chevron-down");
   document.getElementById("search-appareil").placeholder =
     "Rechercher un appareil";
 });
 
 function getAppliance() {
-  let appliances = recipesJson.map((elt) => elt.appliance).flat();
+  let appliances = recipesJson.map((recipe) => recipe.appliance).flat();
 
   let arrayAppliances = Array.from(new Set(appliances));
+  console.log(arrayAppliances);
 }
 
 // ===========================  Button ustensiles ================================================
@@ -256,7 +257,7 @@ function getUstensils() {
   let ustensils = recipesJson.map((recipe) => recipe.ustensils).flat();
   let arrayUstensils = Array.from(new Set(ustensils)); // tri des ustensiles et des doublons
   USTENSILS.push(arrayUstensils); // USTENSILS = variable globale accessible
-  //console.log(arrayUstensils);
+
   displayUstensils(arrayUstensils);
   return arrayUstensils;
 }
@@ -321,8 +322,6 @@ function sortUstensils(ustensils) {
       matchedUstensils = [];
       sousMenuUstensile.style.display = "none";
       displayUstensils(ustensils);
-      console.log(ustensils);
-      console.log(activeUstensils);
     }
   });
 }
@@ -336,52 +335,45 @@ function searchMatchUstensils(ustensil, valueInputUstensils) {
   return false;
 }
 
-function showTag(value) {
-  console.log(value);
-  let valueTags = document.querySelectorAll(".value");
+function showTag(ustensils) {
+  let tagsUstensils = document.querySelectorAll(".value");
 
-  valueTags.forEach((valuetag, index) => {
-    valuetag.addEventListener("click", (e) => {
-      let ustensilName = valuetag.textContent;
-      console.log(ustensilName);
-      console.log(value);
-      for (let i = 0; i < value.length; i++) {
-        let elt = value[i];
-        if (ustensilName == elt) {
-          valuetag.style.display = "none";
-          value.pop(elt);
-          activeUstensils.push(elt);
-          console.log(value);
-          console.log(activeUstensils);
+  tagsUstensils.forEach((tagUstensil) => {
+    tagUstensil.addEventListener("click", (e) => {
+      let ustensilTextContent = tagUstensil.textContent;
+
+      ustensils.forEach((ustensil, index) => {
+        if (ustensilTextContent == ustensil) {
+          ustensils.splice(index, 1);
+          tagUstensil.style.display = "none";
+          activeUstensils.push(ustensil);
         }
-      }
+      });
+      console.log(ustensils);
+      console.log(activeUstensils);
       tagShowButton(e);
-      removeTag(value);
-
-      return value;
+      removeTag(ustensils);
+      return ustensils;
     });
   });
 }
 
-function removeTag(value) {
-  console.log(value);
+function removeTag(ustensil) {
   let btnUstensil = document.querySelectorAll(".btn-ustensils-matched");
 
-  btnUstensil.forEach((btn, index) => {
+  btnUstensil.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      let btnValue = btn.textContent;
-      console.log(btnValue);
-
-      for (let i = 0; i < activeUstensils.length; i++) {
-        const elt = activeUstensils[i];
-        activeUstensils.filter(elt);
-        console.log(activeUstensils);
-        if (btnValue == elt) {
-          console.log("true");
-          value.push(elt);
-          console.log(value);
+      let btnTextContent = btn.textContent;
+      activeUstensils.forEach((removeUstensil, index) => {
+        if (btnTextContent == removeUstensil) {
+          activeUstensils.splice(index, 1);
+          ustensil.push(removeUstensil);
+          console.log(ustensil);
+          btn.style.display = "none";
+          displayUstensils(ustensil);
+          return ustensil;
         }
-      }
+      });
     });
   });
 }
@@ -402,45 +394,5 @@ function tagShowButton(e) {
 }
 
 // ======================== On affiche les ustensiles qui match avec la saisie utilisateur ======
-console.log(activeUstensils);
+
 fetchRecipes();
-
-/*
-
-
-
-
-let valueTag = document.querySelectorAll(".value");
-valueTag.forEach((value) => {
-  value.addEventListener("click", (e) => {
-    tagActive.push(value.textContent);
-    value.remove();
-    tagShowButton(e);
-    //up recipe
-    console.log(tagActive);
-  });
-});
-
-function remove() {
-  let tags = document.querySelectorAll(".btn-ustensils-matched");
-
-  tags.forEach((tag) => {
-    tag.addEventListener("click", (e) => {
-      let tagValue = tag.textContent;
-
-      activeUstensils.forEach((valueArrayUstensils, index) => {
-        if (tagValue == valueArrayUstensils || tagValue == tag) {
-          //ustensils.push(tagValue);
-
-          activeUstensils.pop(valueArrayUstensils);
-          tag.style.display = "none";
-          console.log(activeUstensils);
-          console.log(true);
-        } else {
-          console.log(false);
-        }
-      });
-    });
-  });
-}
-*/
