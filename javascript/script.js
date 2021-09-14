@@ -199,12 +199,43 @@ btnIngredient.addEventListener("click", () => {
     "Rechercher un ingrédient";
 });
 
+// =========================== Map Ingredients =============================
 function getIngredients() {
-  let ingredients = recipesJson.map((elt) => elt.ingredients);
+  let ingredientsMap = recipesJson.map((elt) => elt.ingredients);
+  let array = [];
+  for (let i = 0; i < ingredientsMap.length; i++) {
+    let ingredients = ingredientsMap[i];
+    for (let ingredient of ingredients) {
+      let selectIngredient = ingredient.ingredient;
+      array.push(selectIngredient);
+    }
+  }
+  let arrayIngredients = Array.from(new Set(array));
+  INGREDIENTS.push(arrayIngredients);
+  displayIngredients(arrayIngredients);
+  return arrayIngredients;
+}
 
-  let deleteDuplicates = Array.from(new Set(ingredients));
+//============================ Affichage Ingredients ====================================
 
-  return deleteDuplicates;
+function displayIngredients(ingredients) {
+  let containerHtml = [];
+  let containerUl = document.querySelector(".ingredients");
+  for (let ingredient of ingredients) {
+    containerHtml.push(templateIngredient(ingredient));
+  }
+
+  let html = containerHtml.reduce((a, l) => a + l, " ");
+  containerUl.innerHTML = html;
+  //showTagAppliance(appliances); // a changer
+}
+
+// ================================ Template appliance ===================================
+
+function templateIngredient(ingredient) {
+  return `
+<li class="valueAppliance"><a href="#">${ingredient}</a></li>
+`;
 }
 
 // ===========================  Button Appareil  ======================
