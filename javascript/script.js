@@ -1,13 +1,19 @@
 const container = document.querySelector("#container");
 
 let recipesJson; //
-
+// Ingrédients
 let INGREDIENTS = [];
-let USTENSILS = [];
+let matchedIngredients = [];
+let activeIngredients = [];
+
+// Appliances
 
 let APPLIANCE = [];
+let matchedAppliances = [];
+let activeAppliances = [];
 
-let activeIngredients = [];
+// Ustensils
+let USTENSILS = [];
 let matchedUstensils = []; // recherche dans la barre de recherche ustensiles si true
 let activeUstensils = []; // tableau vide ou les ustensiles selectionnés par l'utilisateur se mettront
 
@@ -33,6 +39,7 @@ async function fetchRecipes() {
     .then(() => {
       sortRecipesGlobalSearch(recipesJson);
       sortUstensils(USTENSILS);
+      sortAppliances(APPLIANCE);
     });
 }
 //console.log(USTENSILS);
@@ -209,17 +216,155 @@ const sousMenuAppareil = document.querySelector(".sous-menu-appareil");
 btnAppareil.addEventListener("click", () => {
   inputAppareil.style.width = "130%";
   sousMenuAppareil.style.display = "block";
-  document.getElementById("i").classList.add("fa-chevron-up");
-  document.getElementById("i").classList.remove("fa-chevron-down");
+  // document.getElementById("i").classList.add("fa-chevron-up");
+  //document.getElementById("i").classList.remove("fa-chevron-down");
   document.getElementById("search-appareil").placeholder =
     "Rechercher un appareil";
 });
 
+// ============================ Map Appliances =============================
+
 function getAppliance() {
   let appliances = recipesJson.map((recipe) => recipe.appliance).flat();
-
   let arrayAppliances = Array.from(new Set(appliances));
-  console.log(arrayAppliances);
+  APPLIANCE.push(arrayAppliances);
+  displayAppliances(arrayAppliances);
+  return arrayAppliances;
+}
+
+//============================ Affichage appliances ====================================
+
+function displayAppliances(appliances) {
+  let containerHtml = [];
+  let containerUl = document.querySelector(".appareil");
+  for (let appliance of appliances) {
+    containerHtml.push(templateAppliance(appliance));
+  }
+
+  let html = containerHtml.reduce((a, l) => a + l, " ");
+  containerUl.innerHTML = html;
+  showTagAppliance(appliances);
+}
+
+// ================================ Template appliance ===================================
+
+function templateAppliance(appliance) {
+  return `
+<li class="valueAppliance"><a href="#">${appliance}</a></li>
+`;
+}
+
+// ========= Fonction trier les appareils =======================================
+
+function sortAppliances(appliances) {
+  const inputSearchAppliances = document.querySelector("#search-appareil");
+
+  inputSearchAppliances.addEventListener("input", (e) => {
+    let valueInputAppliances = e.target.value;
+
+    if (valueInputAppliances.length >= 3) {
+      let inputsAppliances = valueInputAppliances.split(" ");
+      if (valueInputAppliances) {
+        appliances.forEach((appliance, index) => {
+          //
+
+          let matched = inputsAppliances.every((input) =>
+            searchMatchAppliances(appliance, input)
+          );
+
+          if (matched == true) {
+            appliances.splice(index, 1);
+            matchedAppliances.push(appliance);
+            sousMenuAppareil.style.display = "block";
+          }
+        });
+
+        console.log(matchedAppliances);
+        displayAppliances(matchedAppliances);
+        return matchedAppliances;
+      }
+    } else if (valueInputAppliances == 0) {
+      matchedAppliances.forEach((removeAppliance) => {
+        appliances.push(removeAppliance);
+      });
+      matchedAppliances = [];
+      sousMenuAppareil.style.display = "none";
+      displayAppliances(appliances);
+    }
+  });
+}
+function searchMatchAppliances(appliance, valueInputAppliances) {
+  let test = appliance;
+
+  let regex = new RegExp(valueInputAppliances, "i");
+
+  if (regex.test(test)) return true;
+
+  return false;
+}
+
+// ==================== Affichage tag appareil =============================
+
+function showTagAppliance(appliances) {
+  let tagsAppliances = document.querySelectorAll(".valueAppliance");
+
+  tagsAppliances.forEach((tagAppliance) => {
+    tagAppliance.addEventListener("click", (e) => {
+      let applianceTextContent = tagAppliance.textContent;
+
+      appliances.forEach((appliance, index) => {
+        if (applianceTextContent == appliance) {
+          appliances.splice(index, 1);
+          tagAppliance.style.display = "none";
+          activeAppliances.push(appliance);
+        }
+      });
+      console.log(appliances);
+      console.log(activeAppliances);
+      tagShowButtonAppliance(e);
+      removeTagAppliance(appliances);
+      return appliances;
+    });
+  });
+}
+
+// ==================== Supprimer tag appareil =====================
+
+function removeTagAppliance(appliance) {
+  let btnAppliance = document.querySelectorAll(".btn-appliance-matched");
+
+  btnAppliance.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      let btnTextContent = btn.textContent;
+      activeAppliances.forEach((removeAppliance, index) => {
+        if (btnTextContent == removeAppliance) {
+          activeAppliances.splice(index, 1);
+          appliance.push(removeAppliance);
+
+          btn.style.display = "none";
+          displayAppliances(appliance);
+          return appliance;
+        }
+      });
+    });
+  });
+}
+
+//=====================  tag appareil ===============================
+
+function tagShowButtonAppliance(e) {
+  console.log(e.target);
+  let valueText = e.target.innerText;
+  let divMatchedButton = document.querySelector(".add-matchedButton");
+  let btn = document.createElement("button");
+  btn.classList.add("btn-appliance-matched");
+
+  let addText = document.createTextNode(valueText); // Créer un noeud textuel
+  btn.appendChild(addText); // Ajouter le texte au bouton
+  let test = document.createElement("i");
+  test.classList.add("far", "fa-times-circle");
+  btn.insertAdjacentElement("beforeend", test);
+  divMatchedButton.appendChild(btn);
 }
 
 // ===========================  Button ustensiles ================================================

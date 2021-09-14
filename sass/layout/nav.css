@@ -258,7 +258,6 @@ nav form.search-bar button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-top: 10%;
 }
 
 .content-appareil .appareil {
@@ -267,9 +266,14 @@ nav form.search-bar button {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.content-appareil .appareil li {
+  margin: 2px;
 }
 
 .content-appareil .appareil a {
@@ -403,6 +407,24 @@ nav form.search-bar button {
 }
 
 .btn-ustensils-matched .fa-times-circle {
+  padding-left: 10px;
+}
+
+.btn-appliance-matched {
+  background: #68d9a4;
+  border-radius: 5px;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin-right: 5px;
+}
+
+.btn-appliance-matched .fa-times-circle {
   padding-left: 10px;
 }
 

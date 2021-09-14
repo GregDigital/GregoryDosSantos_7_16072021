@@ -185,12 +185,14 @@ nav {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  margin-top: 10%;
 
   .appareil {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    li {
+      margin: 2px;
+    }
     a {
       text-decoration: none;
       color: white;
@@ -277,6 +279,23 @@ nav {
 
 .btn-ustensils-matched {
   background: #ed6454;
+  border-radius: 5px;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin-right: 5px;
+  .fa-times-circle {
+    padding-left: 10px;
+  }
+}
+
+.btn-appliance-matched {
+  background: #68d9a4;
   border-radius: 5px;
   font-family: "Lato";
   font-style: normal;
