@@ -40,6 +40,7 @@ async function fetchRecipes() {
       sortRecipesGlobalSearch(recipesJson);
       sortUstensils(USTENSILS);
       sortAppliances(APPLIANCE);
+      sortIngredients(INGREDIENTS);
     });
 }
 //console.log(USTENSILS);
@@ -227,15 +228,130 @@ function displayIngredients(ingredients) {
 
   let html = containerHtml.reduce((a, l) => a + l, " ");
   containerUl.innerHTML = html;
-  //showTagAppliance(appliances); // a changer
+  showTagIngredient(ingredients); // a changer
 }
 
-// ================================ Template appliance ===================================
+// ================================ Template ingredient ===================================
 
 function templateIngredient(ingredient) {
   return `
-<li class="valueAppliance"><a href="#">${ingredient}</a></li>
+<li class="valueIngredient"><a href="#">${ingredient}</a></li>
 `;
+}
+
+// ========= Fonction trier les ingredients =======================================
+
+function sortIngredients(ingredients) {
+  const inputSearchIngredients = document.querySelector("#search-ingredient");
+
+  inputSearchIngredients.addEventListener("input", (e) => {
+    let valueInputIngredients = e.target.value;
+
+    if (valueInputIngredients.length >= 3) {
+      let inputsIngredients = valueInputIngredients.split(" ");
+      if (valueInputIngredients) {
+        ingredients.forEach((ingredient, index) => {
+          //
+
+          let matched = inputsIngredients.every((input) =>
+            searchMatchIngredients(ingredient, input)
+          );
+
+          if (matched == true) {
+            ingredients.splice(index, 1);
+            matchedIngredients.push(ingredient);
+            sousMenu.style.display = "block";
+          }
+        });
+
+        // showTag();
+        // removeTag();
+        console.log(matchedIngredients);
+        displayIngredients(matchedIngredients);
+        return matchedIngredients;
+      }
+    } else if (valueInputIngredients == 0) {
+      matchedIngredients.forEach((removeIngredient) => {
+        ingredients.push(removeIngredient);
+      });
+      matchedIngredients = [];
+      sousMenu.style.display = "none";
+      displayIngredients(ingredients);
+    }
+  });
+}
+function searchMatchIngredients(ingredient, valueInputIngredients) {
+  let test = ingredient;
+
+  let regex = new RegExp(valueInputIngredients, "i");
+
+  if (regex.test(test)) return true;
+
+  return false;
+}
+
+// ==================== Affichage tag Ingredient =============================
+
+function showTagIngredient(ingredients) {
+  let tagsIngredients = document.querySelectorAll(".valueIngredient");
+
+  tagsIngredients.forEach((tagIngredient) => {
+    tagIngredient.addEventListener("click", (e) => {
+      let ingredientsTextContent = tagIngredient.textContent;
+
+      ingredients.forEach((ingredient, index) => {
+        if (ingredientsTextContent == ingredient) {
+          ingredients.splice(index, 1);
+          tagIngredient.style.display = "none";
+          activeIngredients.push(ingredient);
+        }
+      });
+      console.log(ingredients);
+      console.log(activeIngredients);
+      tagShowButtonIngredient(e);
+      removeTagIngredient(ingredients);
+      return ingredients;
+    });
+  });
+}
+
+// ==================== Supprimer tag Ingredient =====================
+
+function removeTagIngredient(ingredient) {
+  let btnIngredient = document.querySelectorAll(".btn-ingredient-matched");
+
+  btnIngredient.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      let btnTextContent = btn.textContent;
+      activeIngredients.forEach((removeIngredient, index) => {
+        if (btnTextContent == removeIngredient) {
+          activeIngredients.splice(index, 1);
+          ingredient.push(removeIngredient);
+
+          btn.style.display = "none";
+          displayIngredients(ingredient);
+          return ingredient;
+        }
+      });
+    });
+  });
+}
+
+//=====================  tag Ingredient ===============================
+
+function tagShowButtonIngredient(e) {
+  console.log(e.target);
+  let valueText = e.target.innerText;
+  let divMatchedButton = document.querySelector(".add-matchedButton");
+  let btn = document.createElement("button");
+  btn.classList.add("btn-ingredient-matched");
+
+  let addText = document.createTextNode(valueText); // Créer un noeud textuel
+  btn.appendChild(addText); // Ajouter le texte au bouton
+  let test = document.createElement("i");
+  test.classList.add("far", "fa-times-circle");
+  btn.insertAdjacentElement("beforeend", test);
+  divMatchedButton.appendChild(btn);
 }
 
 // ===========================  Button Appareil  ======================
@@ -337,16 +453,16 @@ function searchMatchAppliances(appliance, valueInputAppliances) {
 // ==================== Affichage tag appareil =============================
 
 function showTagAppliance(appliances) {
-  let tagsAppliances = document.querySelectorAll(".valueAppliance");
+  let tagsIngredients = document.querySelectorAll(".valueAppliance");
 
-  tagsAppliances.forEach((tagAppliance) => {
-    tagAppliance.addEventListener("click", (e) => {
-      let applianceTextContent = tagAppliance.textContent;
+  tagsIngredients.forEach((tagIngredient) => {
+    tagIngredient.addEventListener("click", (e) => {
+      let applianceTextContent = tagIngredient.textContent;
 
       appliances.forEach((appliance, index) => {
         if (applianceTextContent == appliance) {
           appliances.splice(index, 1);
-          tagAppliance.style.display = "none";
+          tagIngredient.style.display = "none";
           activeAppliances.push(appliance);
         }
       });

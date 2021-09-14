@@ -277,6 +277,23 @@ nav {
   }
 }
 
+.btn-ingredient-matched {
+  background: #3282f7;
+  border-radius: 5px;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin-right: 5px;
+  .fa-times-circle {
+    padding-left: 10px;
+  }
+}
+
 .btn-ustensils-matched {
   background: #ed6454;
   border-radius: 5px;
