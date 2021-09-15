@@ -43,7 +43,7 @@ async function fetchRecipes() {
       sortIngredients(INGREDIENTS);
     });
 }
-//console.log(USTENSILS);
+
 /*
 function updateRecipes(recipes) {
   let rlt = sortRecipesGlobalSearch(recipes);
