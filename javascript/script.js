@@ -563,7 +563,7 @@ function gestionnaireDeClic(e) {
   }
 }
 document
-  .querySelector("body")
+  .querySelector(".test")
   .addEventListener("click", gestionnaireDeClic, false);
 
 // ============================ Map Ustensils =============================
