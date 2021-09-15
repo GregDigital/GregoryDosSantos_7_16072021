@@ -47,7 +47,7 @@ async function fetchRecipes() {
 /*
 function updateRecipes(recipes) {
   let rlt = sortRecipesGlobalSearch(recipes);
-  rlt = sortUstensils(rlt);
+  rlt = sortRecipesByUstensils(rlt);
   rlt = sortRecipesByIngredients(rlt);
   rlt = sortRecipesByAppliances(rlt);
   displayRecipes(rlt);
@@ -65,7 +65,7 @@ function sortRecipesByIngredients(recipes) {
   });
   return rlt;
 }
-*/
+
 function displayRecipes(recipes) {
   if (recipes.length > 0) {
     document.querySelector("#recipes-no-found").style.display = "none";
@@ -186,16 +186,17 @@ function templateRecipe(recipe) {
 
 // ===========================  Button Ingredients   ======================
 
-const btnIngredient = document.querySelector(".btn-ingredient");
-const inputIngredient = document.querySelector(".search-ingredient");
-const sousMenu = document.querySelector(".sous-menu");
-const up = document.querySelector("#i");
+let btnIngredient = document.querySelector(".btn-ingredient");
+let inputIngredient = document.querySelector(".search-ingredient");
+let sousMenu = document.querySelector(".sous-menu");
+let chevronDownI = document.querySelector(".noneIngredients");
+let chevronUpI = document.querySelector(".addIngredients");
 
 btnIngredient.addEventListener("click", () => {
   inputIngredient.style.width = "100%";
   sousMenu.style.display = "block";
-  // document.getElementById("i").classList.add("fa-chevron-up");
-  // document.getElementById("i").classList.remove("fa-chevron-down");
+  chevronDownI.style.display = "none";
+  chevronUpI.style.display = "block";
   document.querySelector(".search-ingredient").placeholder =
     "Rechercher un ingrédient";
 });
@@ -356,15 +357,19 @@ function tagShowButtonIngredient(e) {
 
 // ===========================  Button Appareil  ======================
 
-const btnAppareil = document.querySelector(".btn-appareil");
-const inputAppareil = document.querySelector(".search-appareil");
-const sousMenuAppareil = document.querySelector(".sous-menu-appareil");
+let btnAppareil = document.querySelector(".btn-appareil");
+let inputAppareil = document.querySelector(".search-appareil");
+let sousMenuAppareil = document.querySelector(".sous-menu-appareil");
+let chevronDownA = document.querySelector(".noneAppareils");
+let chevronUpA = document.querySelector(".addAppareils");
 
 btnAppareil.addEventListener("click", () => {
   inputAppareil.style.width = "130%";
   sousMenuAppareil.style.display = "block";
   // document.getElementById("i").classList.add("fa-chevron-up");
   //document.getElementById("i").classList.remove("fa-chevron-down");
+  chevronDownA.style.display = "none";
+  chevronUpA.style.display = "block";
   document.getElementById("search-appareil").placeholder =
     "Rechercher un appareil";
 });
@@ -519,28 +524,48 @@ function tagShowButtonAppliance(e) {
 let btnUstensile = document.querySelector(".btn-ustensiles");
 let inputUstensile = document.querySelector(".search-ustensiles");
 let sousMenuUstensile = document.querySelector(".sous-menu-ustensiles");
-let chevronDown = document.querySelector(".none");
-let chevronUp = document.querySelector(".add");
-let closeBtn = document.querySelector(".add");
+let chevronDown = document.querySelector(".noneUstensiles");
+let chevronUp = document.querySelector(".addUstensiles");
 
 btnUstensile.addEventListener("click", () => {
   inputUstensile.style.width = "130%";
   sousMenuUstensile.style.display = "block";
+  // document.getElementById("i").classList.add("fa-chevron-up");
+  //document.getElementById("i").classList.remove("fa-chevron-down");
   chevronDown.style.display = "none";
   chevronUp.style.display = "block";
   document.getElementById("search-ustensiles").placeholder =
     "Rechercher un Ustensiles";
 });
 
-let inputUstensil = document.querySelector(".search-ustensiles");
-let sousMenuUstensil = document.querySelector(".sous-menu-ustensiles");
-let chevronDow = document.querySelector(".none");
-let chevronU = document.querySelector(".add");
-let hello = document.querySelector(".noneSS");
+function gestionnaireDeClic(e) {
+  if (e.target.classList.contains("closeUstensils")) {
+    inputUstensile.style.width = "44%";
+    sousMenuUstensile.style.display = "none";
+    chevronDown.style.display = "block";
+    chevronUp.style.display = "none";
+    document.getElementById("search-ustensiles").placeholder = "Ustensiles";
+  }
 
-closeBtn.addEventListener("click", () => {
-  hello.style.display = "none";
-});
+  if (e.target.classList.contains("closeAppareils")) {
+    inputAppareil.style.width = "44%";
+    sousMenuAppareil.style.display = "none";
+    chevronDownA.style.display = "block";
+    chevronUpA.style.display = "none";
+    document.getElementById("search-appareil").placeholder = "Appareil";
+  }
+
+  if (e.target.classList.contains("closeIngredients")) {
+    inputIngredient.style.width = "44%";
+    sousMenu.style.display = "none";
+    chevronDownI.style.display = "block";
+    chevronUpI.style.display = "none";
+    document.getElementById("search-ingredient").placeholder = "Ingredient";
+  }
+}
+document
+  .querySelector("body")
+  .addEventListener("click", gestionnaireDeClic, false);
 
 // ============================ Map Ustensils =============================
 

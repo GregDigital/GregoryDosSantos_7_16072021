@@ -604,6 +604,18 @@ nav form.search-bar button {
   margin-bottom: 15px;
 }
 
+.addUstensiles {
+  display: none;
+}
+
+.addIngredients {
+  display: none;
+}
+
+.addAppareils {
+  display: none;
+}
+
 section {
   display: -webkit-box;
   display: -ms-flexbox;

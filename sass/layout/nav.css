@@ -452,4 +452,16 @@ nav form.search-bar button {
   margin-right: 8%;
   margin-bottom: 15px;
 }
+
+.addUstensiles {
+  display: none;
+}
+
+.addIngredients {
+  display: none;
+}
+
+.addAppareils {
+  display: none;
+}
 /*# sourceMappingURL=nav.css.map */

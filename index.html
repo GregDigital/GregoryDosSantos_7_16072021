@@ -21,14 +21,14 @@
     <title>Les petits plats</title>
   </head>
 
-  <body>
-    <header>
+  <body class="test">
+    <header class="test">
       <a href="index.html" title="Page d'accueil"
         ><img src="./media/logo.svg" alt="logo du site les petits plats"
       /></a>
     </header>
 
-    <nav>
+    <nav class="test">
       <form class="search-bar" action="">
         <input
           type="search"
@@ -59,7 +59,10 @@
           id="search-ingredient"
           type="submit"
         >
-          <i class="fas fa-chevron-down"></i>
+          <div class="addIngredients">
+            <i class="fas fa-chevron-up closeIngredients"></i>
+          </div>
+          <div class="noneIngredients"><i class="fas fa-chevron-down"></i></div>
         </button>
         <div class="sous-menu">
           <div class="content-ingredient">
@@ -80,7 +83,10 @@
           name="search-appareil"
         />
         <button class="btn-appareil" type="submit">
-          <i class="fas fa-chevron-down"></i>
+          <div class="addAppareils">
+            <i class="fas fa-chevron-up closeAppareils"></i>
+          </div>
+          <div class="noneAppareils"><i class="fas fa-chevron-down"></i></div>
         </button>
         <div class="sous-menu-appareil">
           <div class="content-appareil">
@@ -101,8 +107,10 @@
           name="search-ustensiles"
         />
         <button class="btn-ustensiles" id="search-ustensiles" type="submit">
-          <div class="none"><i class="fas fa-chevron-down"></i></div>
-          <div class="add"><i class="fas fa-chevron-up"></i></div>
+          <div class="addUstensiles">
+            <i class="fas fa-chevron-up closeUstensils"></i>
+          </div>
+          <div class="noneUstensiles"><i class="fas fa-chevron-down"></i></div>
         </button>
         <div class="sous-menu-ustensiles">
           <div class="content-ustensiles">
@@ -114,7 +122,7 @@
       </div>
     </div>
 
-    <main>
+    <main class="test">
       <section id="container">
         <article class="recipes-container">
           <div class="img"></div>
