@@ -37,16 +37,15 @@ async function fetchRecipes() {
       */
     })
     .then(() => {
-      sortRecipesGlobalSearch(recipesJson);
+      setEvent(recipesJson);
       sortUstensils(USTENSILS);
       sortAppliances(APPLIANCE);
       sortIngredients(INGREDIENTS);
     });
 }
 
-/*
-function updateRecipes(recipes) {
-  let rlt = sortRecipesGlobalSearch(recipes);
+function updateRecipes() {
+  let rlt = sortRecipesGlobalSearch(recipesJson);
   rlt = sortRecipesByUstensils(rlt);
   rlt = sortRecipesByIngredients(rlt);
   rlt = sortRecipesByAppliances(rlt);
@@ -57,13 +56,24 @@ function sortRecipesByIngredients(recipes) {
   if (activeIngredients == []) return recipes;
 
   let rlt = recipes.filter((recipe) => {
-    // ma recette contient tous les ingrédients sélectionnés par l'utilisateur
-    // return true si c'est vrai sinon return false
-    ustensilActive.every((ustensil) => {
-      recipe.ustensils.include(ustensil);
+    return activeIngredients.every((ingredient) => {
+      let recipesIngredients = recipe.ingredients
+        .map((r) => r.ingredient)
+        .flat();
+      //console.log(recipesIngredients);
+
+      return recipesIngredients.includes(ingredient);
     });
   });
   return rlt;
+}
+function sortRecipesByUstensils(recipes) {
+  if (activeUstensils == []) return recipes;
+  return recipes;
+}
+function sortRecipesByAppliances(recipes) {
+  if (activeUstensils == []) return recipes;
+  return recipes;
 }
 
 function displayRecipes(recipes) {
@@ -91,33 +101,34 @@ function displayRecipes(recipes) {
 // ===================== Input principal de recherche ===================
 
 function sortRecipesGlobalSearch(recipes) {
-  const inputSearch = document.querySelector('input[type="search"]');
-  let notFound = document.querySelector("#recipes-no-found");
-  inputSearch.addEventListener("input", (e) => {
-    let valueInput = e.target.value; // mettre en minuscule
+  let valueInput = document.querySelector("#search").value;
+  if (valueInput.length >= 3) {
+    let inputs = valueInput.split(" ");
 
-    if (valueInput.length >= 3) {
-      let inputs = valueInput.split(" ");
+    let matched_recipes = [];
+    if (valueInput) {
+      recipes.forEach((recipe) => {
+        //
 
-      let matched_recipes = [];
-      if (valueInput) {
-        recipes.forEach((recipe) => {
-          //
+        let matched = inputs.every((input) => searchMatchRecipe(recipe, input));
 
-          let matched = inputs.every((input) =>
-            searchMatchRecipe(recipe, input)
-          );
+        if (matched == true) {
+          matched_recipes.push(recipe);
+        }
+      });
 
-          if (matched == true) {
-            matched_recipes.push(recipe);
-          }
-        });
-
-        displayRecipes(matched_recipes);
-      }
-    } else if (valueInput.length < 3) {
-      displayRecipes(recipes);
+      return matched_recipes;
     }
+  } else if (valueInput.length < 3) {
+    return recipes;
+  }
+}
+
+function setEvent(recipes) {
+  const inputSearch = document.querySelector('input[type="search"]');
+
+  inputSearch.addEventListener("input", (e) => {
+    updateRecipes(recipes);
   });
 }
 
@@ -311,6 +322,7 @@ function showTagIngredient(ingredients) {
       console.log(activeIngredients);
       tagShowButtonIngredient(e);
       removeTagIngredient(ingredients);
+      updateRecipes();
       return ingredients;
     });
   });
@@ -331,6 +343,7 @@ function removeTagIngredient(ingredient) {
 
           btn.style.display = "none";
           displayIngredients(ingredient);
+          updateRecipes();
           return ingredient;
         }
       });
@@ -475,6 +488,7 @@ function showTagAppliance(appliances) {
       console.log(activeAppliances);
       tagShowButtonAppliance(e);
       removeTagAppliance(appliances);
+      updateRecipes();
       return appliances;
     });
   });
@@ -495,6 +509,7 @@ function removeTagAppliance(appliance) {
 
           btn.style.display = "none";
           displayAppliances(appliance);
+          updateRecipes();
           return appliance;
         }
       });
@@ -670,6 +685,7 @@ function showTag(ustensils) {
       console.log(activeUstensils);
       tagShowButton(e);
       removeTag(ustensils);
+      updateRecipes();
       return ustensils;
     });
   });
@@ -688,6 +704,7 @@ function removeTag(ustensil) {
           console.log(ustensil);
           btn.style.display = "none";
           displayUstensils(ustensil);
+          updateRecipes();
           return ustensil;
         }
       });
