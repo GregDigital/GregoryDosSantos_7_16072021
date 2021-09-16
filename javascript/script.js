@@ -46,9 +46,9 @@ async function fetchRecipes() {
 
 function updateRecipes() {
   let rlt = sortRecipesGlobalSearch(recipesJson);
-  rlt = sortRecipesByUstensils(rlt);
   rlt = sortRecipesByIngredients(rlt);
   rlt = sortRecipesByAppliances(rlt);
+  rlt = sortRecipesByUstensils(rlt);
   displayRecipes(rlt);
 }
 
@@ -67,13 +67,30 @@ function sortRecipesByIngredients(recipes) {
   });
   return rlt;
 }
+
+function sortRecipesByAppliances(recipes) {
+  if (activeAppliances == []) return recipes;
+  let rlt = recipes.filter((recipe) => {
+    return activeAppliances.every((applianc) => {
+      let recipesAppliances = recipe.appliance;
+
+      return recipesAppliances.includes(applianc);
+    });
+  });
+  return rlt;
+}
+
 function sortRecipesByUstensils(recipes) {
   if (activeUstensils == []) return recipes;
-  return recipes;
-}
-function sortRecipesByAppliances(recipes) {
-  if (activeUstensils == []) return recipes;
-  return recipes;
+  let rlt = recipes.filter((recipe) => {
+    return activeUstensils.every((ustensil) => {
+      let recipesUstensils = recipe.ustensils.map((u) => u).flat();
+      console.log(recipesUstensils);
+
+      return recipesUstensils.includes(ustensil);
+    });
+  });
+  return rlt;
 }
 
 function displayRecipes(recipes) {
@@ -486,9 +503,9 @@ function showTagAppliance(appliances) {
       });
       console.log(appliances);
       console.log(activeAppliances);
+      updateRecipes();
       tagShowButtonAppliance(e);
       removeTagAppliance(appliances);
-      updateRecipes();
       return appliances;
     });
   });
