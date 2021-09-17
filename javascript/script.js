@@ -17,6 +17,7 @@ let USTENSILS = [];
 let matchedUstensils = []; // recherche dans la barre de recherche ustensiles si true
 let activeUstensils = []; // tableau vide ou les ustensiles selectionnés par l'utilisateur se mettront
 
+let activeGlobal = [];
 // ================= Fetch ==============================================
 async function fetchRecipes() {
   await fetch("json/recipes.json")
@@ -85,7 +86,6 @@ function sortRecipesByUstensils(recipes) {
   let rlt = recipes.filter((recipe) => {
     return activeUstensils.every((ustensil) => {
       let recipesUstensils = recipe.ustensils.map((u) => u).flat();
-      console.log(recipesUstensils);
 
       return recipesUstensils.includes(ustensil);
     });
@@ -332,11 +332,11 @@ function showTagIngredient(ingredients) {
         if (ingredientsTextContent == ingredient) {
           ingredients.splice(index, 1);
           tagIngredient.style.display = "none";
-          activeIngredients.push(ingredient);
+          activeGlobal.push(ingredient);
         }
       });
       console.log(ingredients);
-      console.log(activeIngredients);
+      console.log(activeGlobal);
       tagShowButtonIngredient(e);
       removeTagIngredient(ingredients);
       updateRecipes();
@@ -353,9 +353,9 @@ function removeTagIngredient(ingredient) {
   btnIngredient.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       let btnTextContent = btn.textContent;
-      activeIngredients.forEach((removeIngredient, index) => {
+      activeGlobal.forEach((removeIngredient, index) => {
         if (btnTextContent == removeIngredient) {
-          activeIngredients.splice(index, 1);
+          activeGlobal.splice(index, 1);
           ingredient.push(removeIngredient);
 
           btn.style.display = "none";
@@ -498,11 +498,11 @@ function showTagAppliance(appliances) {
         if (applianceTextContent == appliance) {
           appliances.splice(index, 1);
           tagIngredient.style.display = "none";
-          activeAppliances.push(appliance);
+          activeGlobal.push(appliance);
         }
       });
       console.log(appliances);
-      console.log(activeAppliances);
+      console.log(activeGlobal);
       updateRecipes();
       tagShowButtonAppliance(e);
       removeTagAppliance(appliances);
@@ -519,9 +519,9 @@ function removeTagAppliance(appliance) {
   btnAppliance.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       let btnTextContent = btn.textContent;
-      activeAppliances.forEach((removeAppliance, index) => {
+      activeGlobal.forEach((removeAppliance, index) => {
         if (btnTextContent == removeAppliance) {
-          activeAppliances.splice(index, 1);
+          activeGlobal.splice(index, 1);
           appliance.push(removeAppliance);
 
           btn.style.display = "none";
@@ -695,11 +695,11 @@ function showTag(ustensils) {
         if (ustensilTextContent == ustensil) {
           ustensils.splice(index, 1);
           tagUstensil.style.display = "none";
-          activeUstensils.push(ustensil);
+          activeGlobal.push(ustensil);
         }
       });
       console.log(ustensils);
-      console.log(activeUstensils);
+      console.log(activeGlobal);
       tagShowButton(e);
       removeTag(ustensils);
       updateRecipes();
@@ -714,9 +714,9 @@ function removeTag(ustensil) {
   btnUstensil.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       let btnTextContent = btn.textContent;
-      activeUstensils.forEach((removeUstensil, index) => {
+      activeGlobal.forEach((removeUstensil, index) => {
         if (btnTextContent == removeUstensil) {
-          activeUstensils.splice(index, 1);
+          activeGlobal.splice(index, 1);
           ustensil.push(removeUstensil);
           console.log(ustensil);
           btn.style.display = "none";
