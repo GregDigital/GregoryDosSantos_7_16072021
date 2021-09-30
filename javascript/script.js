@@ -58,12 +58,12 @@ function sortRecipesByTags(recipes) {
 
   let rlt = recipes.filter((recipe) => {
     return activeGlobal.every((y) => {
-      let StringRecipes =
+      let stringRecipes =
         recipe.ingredients.map((r) => r.ingredient).flat() +
         recipe.appliance +
         recipe.ustensils.map((u) => u).flat();
 
-      return StringRecipes.includes(y);
+      return stringRecipes.includes(y);
     });
   });
   return rlt;
