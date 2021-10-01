@@ -55,7 +55,36 @@ function updateRecipes() {
 function sortRecipesByIngredients(recipes) {
   if (activeIngredients == []) return recipes;
 
-  let rlt = recipes.filter((recipe) => {
+  let rlt = recipes.forEach((recipe) => {
+    activeIngredients.every((ingredient) => {
+      let recipesIngredients = recipe.ingredients
+        .map((r) => r.ingredient)
+        .flat();
+
+      console.log(recipesIngredients);
+      let recipeMatched = [];
+      //let match = recipesIngredients.includes(ingredient);
+      recipesIngredients.forEach((recipeIngredient) => {
+        if (ingredient == recipeIngredient) {
+          recipeMatched.push(recipe);
+          console.log(recipeMatched);
+          return recipeMatched;
+        }
+      });
+    });
+  });
+  return rlt;
+}
+
+/*
+
+
+
+
+function sortRecipesByIngredients(recipes) {
+  if (activeIngredients == []) return recipes;
+
+  let rlt = recipes.((recipe) => {
     return activeIngredients.every((ingredient) => {
       let recipesIngredients = recipe.ingredients
         .map((r) => r.ingredient)
@@ -67,6 +96,19 @@ function sortRecipesByIngredients(recipes) {
   });
   return rlt;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+*/
 
 function sortRecipesByAppliances(recipes) {
   if (activeAppliances == []) return recipes;
