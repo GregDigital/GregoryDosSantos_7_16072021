@@ -54,26 +54,17 @@ function updateRecipes() {
 
 function sortRecipesByIngredients(recipes) {
   if (activeIngredients == []) return recipes;
-
-  let rlt = recipes.forEach((recipe) => {
-    activeIngredients.every((ingredient) => {
-      let recipesIngredients = recipe.ingredients
-        .map((r) => r.ingredient)
-        .flat();
-
-      console.log(recipesIngredients);
-      let recipeMatched = [];
-      //let match = recipesIngredients.includes(ingredient);
-      recipesIngredients.forEach((recipeIngredient) => {
-        if (ingredient == recipeIngredient) {
-          recipeMatched.push(recipe);
-          console.log(recipeMatched);
-          return recipeMatched;
-        }
-      });
+  let recipeMatched = [];
+  recipes.forEach((recipe) => {
+    let recipesIngredients = recipe.ingredients.map((r) => r.ingredient).flat();
+    let match = activeIngredients.every((ingredient) => {
+      return recipesIngredients.includes(ingredient);
     });
+
+    if (match) recipeMatched.push(recipe);
   });
-  return rlt;
+
+  return recipeMatched;
 }
 
 /*
