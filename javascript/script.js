@@ -14,7 +14,7 @@ let activeAppliances = [];
 
 // Ustensils
 let USTENSILS = [];
-let matchedUstensils = []; // recherche dans la barre de recherche ustensiles si true
+let matchedUstensils = []; // recherche dans la barre de recherche ustensile si true
 let activeUstensils = []; // tableau vide ou les ustensiles selectionnés par l'utilisateur se mettront
 
 // ================= Fetch ==============================================
