@@ -38,6 +38,7 @@ async function fetchRecipes() {
     })
     .then(() => {
       sortRecipesGlobalSearch(recipesJson);
+      sortRecipesByUstensils(recipesJson);
       sortUstensils(USTENSILS);
       sortAppliances(APPLIANCE);
       sortIngredients(INGREDIENTS);
@@ -53,18 +54,7 @@ function updateRecipes(recipes) {
   displayRecipes(rlt);
 }
 
-function sortRecipesByIngredients(recipes) {
-  if (activeIngredients == []) return recipes;
-
-  let rlt = recipes.filter((recipe) => {
-    // ma recette contient tous les ingrédients sélectionnés par l'utilisateur
-    // return true si c'est vrai sinon return false
-    ustensilActive.every((ustensil) => {
-      recipe.ustensils.include(ustensil);
-    });
-  });
-  return rlt;
-}
+//function sortRecipesByUstensils(recipes) {}
 
 function displayRecipes(recipes) {
   if (recipes.length > 0) {
@@ -80,10 +70,13 @@ function displayRecipes(recipes) {
     document.querySelectorAll(".recipes-container").forEach((elt) => {
       elt.style.display = "none";
     });
+    updateRecipes(recipes);
+
     document.querySelector("#recipes-no-found").style.display = "block";
   } else {
     document.querySelector("#recipes-no-found").style.display = "none";
   }
+  sortRecipesByIngredients(recipes);
 }
 
 // ================= fonction qui permet de générer le contenu des recettes=============
@@ -564,7 +557,7 @@ function gestionnaireDeClic(e) {
   }
 }
 document
-  .querySelector("body")
+  .querySelector(".test")
   .addEventListener("click", gestionnaireDeClic, false);
 
 // ============================ Map Ustensils =============================
@@ -666,10 +659,12 @@ function showTag(ustensils) {
           activeUstensils.push(ustensil);
         }
       });
+
       console.log(ustensils);
       console.log(activeUstensils);
       tagShowButton(e);
       removeTag(ustensils);
+      sortRecipesByUstensils(ustensils);
       return ustensils;
     });
   });
@@ -712,4 +707,53 @@ function tagShowButton(e) {
 
 // ======================== On affiche les ustensiles qui match avec la saisie utilisateur ======
 
+function sortRecipesByIngredients(recipes) {
+  if (activeIngredients.length > 1) {
+    console.log(activeIngredients);
+    let rlt = recipes.filter((recipe) => {
+      console.log(recipe);
+      //console.log(activeIngredients);
+      activeIngredients.every((ingredient) => {
+        recipe.ingredient.include(ingredient);
+      });
+      console.log(rlt);
+      return rlt;
+    });
+  } else if (activeIngredients == []) {
+    return recipes;
+  }
+}
+
+function sortRecipesByUstensils(recipes, ustensils) {
+  console.log(ustensils);
+  if (activeUstensils.length >= 1) {
+    console.log("hello");
+    let rlt = recipes.filter((recipe) => {
+      //console.log(activeIngredients);
+      let matched = activeUstensils.every((ustensil) => {
+        recipe.ustensil.include(ustensil);
+      });
+      if (matched == true) {
+        console.log("hel");
+      }
+      //  return rlt;
+    });
+    console.log(rlt);
+  } else if (activeUstensils == []) {
+    displayRecipes(recipes);
+    return recipes;
+  }
+}
+
+function updateRecipes(recipes) {
+  let rlt = sortRecipesGlobalSearch(recipes);
+  console.log(rlt);
+  // rlt = sortRecipesByIngredients(rlt);
+  console.log(rlt);
+  //rlt = sortRecipesByAppliances(rlt);
+  rlt = sortRecipesByUstensils(rlt);
+  displayRecipes(rlt);
+}
+
 fetchRecipes();
+*/
