@@ -272,6 +272,10 @@ nav form.search-bar button {
   border-bottom-right-radius: 5px;
 }
 
+.btn-ingredient .addIngredients {
+  display: none;
+}
+
 .content-ingredient {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -605,10 +609,6 @@ nav form.search-bar button {
 }
 
 .addUstensiles {
-  display: none;
-}
-
-.addIngredients {
   display: none;
 }
 

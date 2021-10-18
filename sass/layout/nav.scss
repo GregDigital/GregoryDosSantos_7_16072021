@@ -86,6 +86,9 @@ nav {
   padding: 10px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  .addIngredients {
+    display: none;
+  }
 }
 
 .content-ingredient {
@@ -338,9 +341,7 @@ nav {
 .addUstensiles {
   display: none;
 }
-.addIngredients {
-  display: none;
-}
+
 .addAppareils {
   display: none;
 }
