@@ -663,7 +663,7 @@ section .recipes-container-infos .recipes-infos {
   margin-bottom: 5%;
 }
 
-section .recipes-container-infos .recipes-infos h3 {
+section .recipes-container-infos .recipes-infos h2 {
   font-size: 18px;
   line-height: 22px;
   color: #000;

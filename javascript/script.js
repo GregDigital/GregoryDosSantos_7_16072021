@@ -189,7 +189,7 @@ function templateRecipe(recipe) {
       <div class="img"></div>
       <div class="recipes-container-infos">
         <div class="recipes-infos">
-          <h3 class="name">${recipe.name}</h3>
+          <h2 class="name">${recipe.name}</h2>
           <div class="time">
             <i class="far fa-clock"></i><span> ${recipe.time}</span>
           </div>
