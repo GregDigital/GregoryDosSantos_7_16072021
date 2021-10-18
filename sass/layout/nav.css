@@ -110,6 +110,7 @@ nav form.search-bar button {
 }
 
 .btn-ingredient {
+  margin: 0;
   height: 69px;
   color: white;
   font-size: 1.3em;
@@ -225,6 +226,7 @@ nav form.search-bar button {
 }
 
 .btn-appareil {
+  margin: 0;
   height: 69px;
   color: white;
   font-size: 1.3em;
@@ -340,6 +342,7 @@ nav form.search-bar button {
 }
 
 .btn-ustensiles {
+  margin: 0;
   background: #ed6454;
   height: 69px;
   color: white;
