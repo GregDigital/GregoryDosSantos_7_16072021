@@ -236,6 +236,10 @@ nav form.search-bar button {
   border-bottom-right-radius: 5px;
 }
 
+.btn-appareil .addAppareils {
+  display: none;
+}
+
 .sous-menu-appareil {
   padding: 25px;
   font-size: 1em;
@@ -347,6 +351,10 @@ nav form.search-bar button {
   border-bottom-right-radius: 5px;
 }
 
+.btn-ustensiles .addUstensiles {
+  display: none;
+}
+
 .sous-menu-ustensiles {
   padding: 25px;
   font-size: 1em;
@@ -455,13 +463,5 @@ nav form.search-bar button {
   margin-left: 8%;
   margin-right: 8%;
   margin-bottom: 15px;
-}
-
-.addUstensiles {
-  display: none;
-}
-
-.addAppareils {
-  display: none;
 }
 /*# sourceMappingURL=nav.css.map */

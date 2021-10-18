@@ -166,6 +166,9 @@ nav {
   padding: 10px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  .addAppareils {
+    display: none;
+  }
 }
 
 .sous-menu-appareil {
@@ -243,6 +246,9 @@ nav {
   padding: 10px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  .addUstensiles {
+    display: none;
+  }
 }
 
 .sous-menu-ustensiles {
@@ -336,12 +342,4 @@ nav {
   margin-left: 8%;
   margin-right: 8%;
   margin-bottom: 15px;
-}
-
-.addUstensiles {
-  display: none;
-}
-
-.addAppareils {
-  display: none;
 }
