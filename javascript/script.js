@@ -186,7 +186,7 @@ function searchMatchRecipe(recipe, valueInput) {
   let { name, ingredients, description, appliance, ustensils } = recipe;
   let regex = new RegExp(valueInput, "i");
 
-  if (regex.test(name)) return true;
+  //if (regex.test(name)) return true;
 
   let ing_words = ingredients
     .map((e) => e.ingredient.split(" "))
@@ -196,6 +196,10 @@ function searchMatchRecipe(recipe, valueInput) {
   if (regex.test(ing_words)) return true;
 
   if (regex.test(description)) return true;
+
+  // Session
+  // if (regex.test(name + description + ing_words)) return true  ===> concatener
+  // if(ing_words.includes(valueInput)) return true
 
   return false;
 }
