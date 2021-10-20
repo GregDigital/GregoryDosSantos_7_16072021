@@ -193,12 +193,12 @@ function searchMatchRecipe(recipe, valueInput) {
     .flat()
     .join(" ");
 
-  if (regex.test(ing_words)) return true;
+  //if (regex.test(ing_words)) return true;
 
-  if (regex.test(description)) return true;
+  // if (regex.test(description)) return true;
 
   // Session
-  // if (regex.test(name + description + ing_words)) return true  ===> concatener
+  if (regex.test(name + description + ing_words)) return true;
   // if(ing_words.includes(valueInput)) return true
 
   return false;
