@@ -119,6 +119,7 @@ function displayRecipes(recipes) {
 
 function sortRecipesGlobalSearch(recipes) {
   let valueInput = document.querySelector("#search").value;
+  console.time();
   if (valueInput.length >= 3) {
     let inputs = valueInput.split(" ");
 
@@ -130,6 +131,7 @@ function sortRecipesGlobalSearch(recipes) {
         let matched = inputs.every((input) => searchMatchRecipe(recipe, input));
 
         if (matched == true) {
+          console.timeEnd();
           matched_recipes.push(recipe);
         }
       });
@@ -163,6 +165,10 @@ function searchMatchRecipe(recipe, valueInput) {
   if (regex.test(ing_words)) return true;
 
   if (regex.test(description)) return true;
+
+  if (regex.test(appliance)) return true;
+
+  if (regex.test(ustensils)) return true;
 
   return false;
 }
