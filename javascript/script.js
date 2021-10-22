@@ -157,7 +157,7 @@ function sortRecipesGlobalSearch(recipes) {
 
     let matched_recipes = [];
     if (valueInput) {
-      recipes.forEach((recipe) => {
+      recipes.filter((recipe) => {
         //
 
         let matched = inputs.every((input) => searchMatchRecipe(recipe, input));
@@ -186,20 +186,14 @@ function searchMatchRecipe(recipe, valueInput) {
   let { name, ingredients, description, appliance, ustensils } = recipe;
   let regex = new RegExp(valueInput, "i");
 
-  //if (regex.test(name)) return true;
-
   let ing_words = ingredients
     .map((e) => e.ingredient.split(" "))
     .flat()
     .join(" ");
 
-  //if (regex.test(ing_words)) return true;
+  if (regex.test(ing_words + description)) return true;
 
-  // if (regex.test(description)) return true;
-
-  // Session
-  if (regex.test(name + description + ing_words)) return true;
-  // if(ing_words.includes(valueInput)) return true
+  if (regex.test(name + appliance + ustensils)) return true;
 
   return false;
 }
@@ -784,3 +778,13 @@ function tagShowButton(e) {
 // ======================== On affiche les ustensiles qui match avec la saisie utilisateur ======
 
 fetchRecipes();
+
+/*A ameliorer
+
+l'algorithme ne tient pas compte des elements il recherche uniquement si un groupe de mot correspond dans le texte.
+exemple si on tape bol
+l'algorithme va effectuer une recherche parmis les 50 recettes et comparer si le mot bol est dans l'une de ces recettes
+il va alors trouver "bol dans bolognaise et bol dans ustensil"
+il faudrait mettre perfectionner l'algo dans ce sens
+
+*/
