@@ -119,22 +119,19 @@ function displayRecipes(recipes) {
 
 function sortRecipesGlobalSearch(recipes) {
   let valueInput = document.querySelector("#search").value;
-  console.time();
   if (valueInput.length >= 3) {
     let inputs = valueInput.split(" ");
 
     let matched_recipes = [];
     if (valueInput) {
-      recipes.forEach((recipe) => {
-        //
-
+      for (let index = 0; index < recipes.length; index++) {
+        let recipe = recipes[index];
         let matched = inputs.every((input) => searchMatchRecipe(recipe, input));
 
         if (matched == true) {
-          console.timeEnd();
           matched_recipes.push(recipe);
         }
-      });
+      }
 
       return matched_recipes;
     }
