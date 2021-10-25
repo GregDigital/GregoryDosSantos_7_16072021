@@ -54,28 +54,8 @@ function updateRecipes() {
 
 function sortRecipesByIngredients(recipes) {
   if (activeIngredients == []) return recipes;
-  let recipeMatched = [];
-  recipes.forEach((recipe) => {
-    let recipesIngredients = recipe.ingredients.map((r) => r.ingredient).flat();
-    let match = activeIngredients.every((ingredient) => {
-      return recipesIngredients.includes(ingredient);
-    });
 
-    if (match) recipeMatched.push(recipe);
-  });
-
-  return recipeMatched;
-}
-
-/*
-
-
-
-
-function sortRecipesByIngredients(recipes) {
-  if (activeIngredients == []) return recipes;
-
-  let rlt = recipes.((recipe) => {
+  let rlt = recipes.filter((recipe) => {
     return activeIngredients.every((ingredient) => {
       let recipesIngredients = recipe.ingredients
         .map((r) => r.ingredient)
@@ -87,19 +67,6 @@ function sortRecipesByIngredients(recipes) {
   });
   return rlt;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-*/
 
 function sortRecipesByAppliances(recipes) {
   if (activeAppliances == []) return recipes;
@@ -118,7 +85,6 @@ function sortRecipesByUstensils(recipes) {
   let rlt = recipes.filter((recipe) => {
     return activeUstensils.every((ustensil) => {
       let recipesUstensils = recipe.ustensils.map((u) => u).flat();
-      console.log(recipesUstensils);
 
       return recipesUstensils.includes(ustensil);
     });
@@ -371,8 +337,7 @@ function showTagIngredient(ingredients) {
           activeIngredients.push(ingredient);
         }
       });
-      console.log(ingredients);
-      console.log(activeIngredients);
+
       tagShowButtonIngredient(e);
       removeTagIngredient(ingredients);
       updateRecipes();
@@ -407,7 +372,6 @@ function removeTagIngredient(ingredient) {
 //=====================  tag Ingredient ===============================
 
 function tagShowButtonIngredient(e) {
-  console.log(e.target);
   let valueText = e.target.innerText;
   let divMatchedButton = document.querySelector(".add-matchedButton");
   let btn = document.createElement("button");
@@ -497,7 +461,6 @@ function sortAppliances(appliances) {
           }
         });
 
-        console.log(matchedAppliances);
         displayAppliances(matchedAppliances);
         return matchedAppliances;
       }
@@ -537,8 +500,7 @@ function showTagAppliance(appliances) {
           activeAppliances.push(appliance);
         }
       });
-      console.log(appliances);
-      console.log(activeAppliances);
+
       updateRecipes();
       tagShowButtonAppliance(e);
       removeTagAppliance(appliances);
@@ -734,8 +696,7 @@ function showTag(ustensils) {
           activeUstensils.push(ustensil);
         }
       });
-      console.log(ustensils);
-      console.log(activeUstensils);
+
       tagShowButton(e);
       removeTag(ustensils);
       updateRecipes();
