@@ -159,15 +159,13 @@ function searchMatchRecipe(recipe, valueInput) {
     .flat()
     .join(" ");
 
-  if (regex.test(ing_words)) return true;
-
-  if (regex.test(description)) return true;
-
-  if (regex.test(appliance)) return true;
-
-  if (regex.test(ustensils)) return true;
-
-  return false;
+  if (regex.test(ing_words + description)) {
+    return true;
+  } else if (regex.test(name + appliance + ustensils)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // ==================== fonction qui permet de générer les ingredients dans le li =======
