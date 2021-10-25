@@ -54,7 +54,55 @@ function updateRecipes() {
 
 function sortRecipesByIngredients(recipes) {
   if (activeIngredients == []) return recipes;
+  let recipeMatched = [];
+  recipes.forEach((recipe) => {
+    let recipesIngredients = recipe.ingredients.map((r) => r.ingredient).flat();
+    let match = activeIngredients.every((ingredient) => {
+      return recipesIngredients.includes(ingredient);
+    });
 
+    if (match) recipeMatched.push(recipe);
+  });
+
+  return recipeMatched;
+}
+
+/*
+
+
+
+
+function sortRecipesByIngredients(recipes) {
+  if (activeIngredients == []) return recipes;
+
+  let rlt = recipes.((recipe) => {
+    return activeIngredients.every((ingredient) => {
+      let recipesIngredients = recipe.ingredients
+        .map((r) => r.ingredient)
+        .flat();
+      //console.log(recipesIngredients);
+
+      return recipesIngredients.includes(ingredient);
+    });
+  });
+  return rlt;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+function sortRecipesByAppliances(recipes) {
+  if (activeAppliances == []) return recipes;
   let rlt = recipes.filter((recipe) => {
     return activeIngredients.every((ingredient) => {
       let recipesIngredients = recipe.ingredients
@@ -153,16 +201,19 @@ function searchMatchRecipe(recipe, valueInput) {
   let { name, ingredients, description, appliance, ustensils } = recipe;
   let regex = new RegExp(valueInput, "i");
 
-  if (regex.test(name)) return true;
-
   let ing_words = ingredients
     .map((e) => e.ingredient.split(" "))
     .flat()
     .join(" ");
 
+  if (regex.test(name)) return true;
   if (regex.test(ing_words)) return true;
 
   if (regex.test(description)) return true;
+
+  if (regex.test(appliance)) return true;
+
+  if (regex.test(ustensils)) return true;
 
   return false;
 }
@@ -747,3 +798,13 @@ function tagShowButton(e) {
 // ======================== On affiche les ustensiles qui match avec la saisie utilisateur ======
 
 fetchRecipes();
+
+/*A ameliorer
+
+l'algorithme ne tient pas compte des elements il recherche uniquement si un groupe de mot correspond dans le texte.
+exemple si on tape bol
+l'algorithme va effectuer une recherche parmis les 50 recettes et comparer si le mot bol est dans l'une de ces recettes
+il va alors trouver "bol dans bolognaise et bol dans ustensil"
+il faudrait mettre perfectionner l'algo dans ce sens
+
+*/
