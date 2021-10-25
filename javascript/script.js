@@ -14,7 +14,7 @@ let activeAppliances = [];
 
 // Ustensils
 let USTENSILS = [];
-let matchedUstensils = []; // recherche dans la barre de recherche ustensile si true
+let matchedUstensils = []; // recherche dans la barre de recherche ustensiles si true
 let activeUstensils = []; // tableau vide ou les ustensiles selectionnés par l'utilisateur se mettront
 
 // ================= Fetch ==============================================
@@ -104,21 +104,6 @@ function sortRecipesByIngredients(recipes) {
 function sortRecipesByAppliances(recipes) {
   if (activeAppliances == []) return recipes;
   let rlt = recipes.filter((recipe) => {
-    return activeIngredients.every((ingredient) => {
-      let recipesIngredients = recipe.ingredients
-        .map((r) => r.ingredient)
-        .flat();
-      //console.log(recipesIngredients);
-
-      return recipesIngredients.includes(ingredient);
-    });
-  });
-  return rlt;
-}
-
-function sortRecipesByAppliances(recipes) {
-  if (activeAppliances == []) return recipes;
-  let rlt = recipes.filter((recipe) => {
     return activeAppliances.every((applianc) => {
       let recipesAppliances = recipe.appliance;
 
@@ -172,7 +157,7 @@ function sortRecipesGlobalSearch(recipes) {
 
     let matched_recipes = [];
     if (valueInput) {
-      recipes.forEach((recipe) => {
+      recipes.filter((recipe) => {
         //
 
         let matched = inputs.every((input) => searchMatchRecipe(recipe, input));
