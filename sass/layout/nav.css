@@ -464,4 +464,70 @@ nav form.search-bar button {
 .addAppareils {
   display: none;
 }
+
+@media screen and (max-width: 688px) {
+  .button-option {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: 8%;
+    margin-right: 8%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .search-ingredient {
+    width: 100%;
+  }
+  .search-appareil {
+    width: 100%;
+  }
+  .search-ustensiles {
+    width: 100%;
+  }
+  .ingredient {
+    margin-bottom: 20px;
+  }
+  .appareils {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .button-option {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: 8%;
+    margin-right: 8%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .search-ingredient {
+    width: 100%;
+  }
+  .search-appareil {
+    width: 100%;
+  }
+  .search-ustensiles {
+    width: 100%;
+  }
+  .ingredient {
+    margin-bottom: 20px;
+  }
+  .appareils {
+    margin-bottom: 20px;
+  }
+}
 /*# sourceMappingURL=nav.css.map */

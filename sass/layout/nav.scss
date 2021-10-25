@@ -344,3 +344,71 @@ nav {
 .addAppareils {
   display: none;
 }
+
+@media screen and (max-width: 688px) {
+  .button-option {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: 8%;
+    margin-right: 8%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search-ingredient {
+    width: 100%;
+  }
+
+  .search-appareil {
+    width: 100%;
+  }
+
+  .search-ustensiles {
+    width: 100%;
+  }
+
+  .ingredient {
+    margin-bottom: 20px;
+  }
+
+  .appareils {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .button-option {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: 8%;
+    margin-right: 8%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search-ingredient {
+    width: 100%;
+  }
+
+  .search-appareil {
+    width: 100%;
+  }
+
+  .search-ustensiles {
+    width: 100%;
+  }
+
+  .ingredient {
+    margin-bottom: 20px;
+  }
+
+  .appareils {
+    margin-bottom: 20px;
+  }
+}
